@@ -2,7 +2,7 @@ var communityControllers = angular.module('communityControllers',[]);
 
 communityControllers.controller('QuestionsController',['$scope','QuestionsService',
 	function($scope,QuestionsService){
-		$.scope.questions = QuestionsService.query();
+		$scope.questions = QuestionsService.query();
 	}]);
 
 /*communityControllers.controller('UserInfoController',['$scope','UserInfoService',
