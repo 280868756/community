@@ -1,1 +1,91 @@
-community.css
+.main-title{
+	margin:25px 0;
+	font-size: 22px;
+	vertical-align:middle;
+}
+.widget-box{
+	margin:25px 0;
+	padding-top: 25px;
+	border-top: 1px solid #eee;
+	/* border-bottom: 1px solid #eee; */
+}
+.widget-message-item{
+	display: block;
+	padding: 4px 0;
+	font-size: 18px;
+	color: #666;
+	
+}
+.widget-message-item:hover{
+	background-color: #eee;
+	text-decoration:none;
+}
+/* 自定义a标签：默认颜色#333，hover颜色white */
+.custom-a-white{
+	color:#333;
+}
+.custom-a-white:hover{
+	color:white;
+	text-decoration:none;
+}
+/* 自定义a标签：默认颜色#333，hover颜色棕色#008E59 */
+.custom-a-brown{
+	color:#333;
+}
+.custom-a-brown:hover{
+	color:#008E59;
+}
+/* 自定义a标签：hover时decoration为none */
+.custom-a-none:hover{
+	text-decoration:none;
+}
+.tag-label{
+	border-radius:5px;
+	margin: 0 5px 5px 0;
+	padding: 3px;
+	background-color: #eee;
+}
+.tag-label:hover{
+	color:white;
+	background-color: #8C8989;
+	/* background-color: #017e66; */
+}
+.tag-message{
+	margin:5px 0;
+}
+.rank{
+	float: left;
+	margin-right: 5px;
+	font-size: 16px;
+	text-align: center;
+	line-height: 1.2;
+	color: #666;
+}
+.votes, .answers, .view{
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	/* background-color: #eee; */
+}
+.rank-block{
+	display: block;
+}
+.question-list-item{
+	height:100%;
+	padding: 12px 0;
+	border-bottom: 1px solid #eee;
+	line-height: 100%;
+}
+.author{
+
+}
+.title{
+	display: inline;
+}
+.summary{
+	padding-left: 145px;
+}
+.summary .tag{
+	margin: 0px;
+	display: inline-block;
+}
