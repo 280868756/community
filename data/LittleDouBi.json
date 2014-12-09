@@ -30,15 +30,13 @@
 			"answers" : 2,
 			"view" : 4,
 
-			"tags" : [
-				{
+			"tags" : [{
 					"label" : "javascipt"
 				},{
 					"label" : "node.js"
 				},{
 					"label" : "bootstrap"
-				}
-			]
+				}]
 		},{
 			"id" : 3,
 			"title" : "如何阅读源代码？你有读过哪些源代码？晒晒你读源代码的经历……",
@@ -59,13 +57,27 @@
 				}]
 		}
 	],
+	"focusTags" : [
+		{
+			"label" : "javascipt"
+		},{
+			"label" : "node.js"
+		},{
+			"label" : "bootstrap"
+		},{
+			"label" : "angularjs"
+		},{
+			"label" : "grunt"
+		},{
+			"label" : "html5"
+		},{
+			"label" : "css3"
+		}
+	],
 	"answers" : [
 
 	],
 	"collect" : [
+	]
 
-	],
-	"focuse" : [
-	
-	],
 }
