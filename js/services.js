@@ -4,13 +4,7 @@ var communityServices = angular.module('communityServices',[
 
 communityServices.factory('QuestionsService',['$resource', 
 	function($resource){
-		return $resource('data/questions.json', {}, {
-    		query: {
-    			method:'GET', 
-    			params:{}, 
-    			isArray:true
-    		}
-  	});
+		return $resource('data/questions.json');
 	}]);
 
 communityServices.factory('UserInfoService',['$resource', 
