@@ -1,0 +1,17 @@
+{
+	"id" : 4,
+	"title" : "java反射如何使用",
+
+	"date" : "2014.12.9 9:07",
+	"author" : "LittleDouBi",
+	
+	"votes" : 5,
+	"answers" : 3,
+	"view" : 9,
+	"focus" : 2,
+	"collect" : 3,
+
+	"tags" : [{
+			"label" : "java"
+		}]
+}

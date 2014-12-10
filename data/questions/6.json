@@ -1,0 +1,21 @@
+{
+	"id" : 6,
+	"title" : "css hack技巧",
+
+	"date" : "2014.12.9 14:07",
+	"author" : "LittleDouBi",
+	
+	"votes" : 3,
+	"answers" : 3,
+	"view" : 8,
+	"focus" : 2,
+	"collect" : 3,
+
+	"tags" : [{
+			"label" : "javascipt"
+		},{
+			"label" : "css"
+		},{
+			"label" : "html"
+		}]
+}

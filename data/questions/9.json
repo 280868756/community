@@ -1,0 +1,17 @@
+{
+	"id" : 9,
+	"title" : "javascipt单元测试怎么写",
+
+	"date" : "2014.12.9 15:07",
+	"author" : "LittleDouBi",
+	
+	"votes" : 0,
+	"answers" : 2,
+	"view" : 5,
+	"focus" : 2,
+	"collect" : 3,
+
+	"tags" : [{
+			"label" : "javascipt"
+		}]
+}

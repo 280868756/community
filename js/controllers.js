@@ -20,3 +20,14 @@ communityControllers.controller('HotInfoController',['$scope','HotInfoService',
 	function($scope,HotInfoService){
 		$scope.hotInfo = HotInfoService.get();
 	}]);
+
+communityControllers.controller('QuestionController',['$scope','$routeParams','QuestionService',
+	function($scope,$routeParams,QuestionService){
+		$scope.question = QuestionService.get({questionId:$routeParams.questionId});
+		$scope.focus = function(){
+			$scope.question.focus += 1; 
+		}
+		$scope.collect = function(){
+			$scope.question.collect += 1; 
+		}
+	}]);

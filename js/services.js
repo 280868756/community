@@ -16,3 +16,8 @@ communityServices.factory('HotInfoService',['$resource',
   function($resource){
     return $resource('data/hotInfo.json');
   }]);
+
+communityServices.factory('QuestionService',['$resource', 
+  function($resource){
+    return $resource('data/questions/:questionId.json');
+  }]);

@@ -89,3 +89,16 @@
 	margin: 0px;
 	display: inline-block;
 }
+.header{
+	padding:15px 0;
+	background-color: #f3f3f3;
+}
+.pt-10{
+	padding-top: 10px;
+}
+.mt-10{
+	margin-top: 10px;
+}
+.question-date{
+	color: #428BCA;
+}

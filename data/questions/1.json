@@ -1,0 +1,21 @@
+{
+	"id" : 1,
+	"title" : "javascript闭包是什么",
+	
+	"date" : "2014.12.2 9:02",
+	"author" : "LittleDouBi",
+
+	"votes" : 0,
+	"answers" : 3,
+	"view" : 4,
+	"focus" : 2,
+	"collect" : 3,
+
+	"tags" : [{
+			"label" : "javascipt"
+		},{
+			"label" : "node.js"
+		},{
+			"label" : "bootstrap"
+		}]
+}

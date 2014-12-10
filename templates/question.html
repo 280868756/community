@@ -5,11 +5,11 @@
 </div>
 <div class="summary">
 	<div class="author">
-		<span>{{question.date}}来自</span>
+		<span>{{question.date}}</span>来自
 		<a class="custom-a-none" href="">{{question.author}}</a>
 	</div>
 	<h3 class="title">
-		<a class="custom-a-brown" href="">{{question.title}}</a>
+		<a class="custom-a-brown" href="#/community/question/{{question.id}}">{{question.title}}</a>
 	</h3>
 	<ul class="list-inline tag">
 		<li ng-repeat="tag in question.tags"><a href="" class="custom-a-none"><span class="label label-info">{{tag.label}}</span></a></li>

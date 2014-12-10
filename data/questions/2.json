@@ -1,0 +1,23 @@
+{
+	"id" : 2,
+	"title" : "关于freeform中textarea的换行问题",
+
+	"date" : "2014.12.2 9:06",
+	"author" : "LittleDouBi",
+	
+	"votes" : 1,
+	"answers" : 2,
+	"view" : 4,
+	"focus" : 2,
+	"collect" : 3,
+
+	"tags" : [
+		{
+			"label" : "javascipt"
+		},{
+			"label" : "node.js"
+		},{
+			"label" : "bootstrap"
+		}
+	]
+}

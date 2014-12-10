@@ -1,0 +1,40 @@
+<div class="wrap">
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+					<div>
+						<a href="#/community/">问答</a>
+						<span>>问答详情</span>
+					</div>
+					<h2 class="title">{{question.title}}</h2>
+					<div class="pt-10">
+						<a class="custom-a-none" href="">{{question.author}}</a>
+						<span>&nbsp;&nbsp;提问于&nbsp;&nbsp;</span>
+						<span>{{question.date}}</span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<ul class="list-unstyled">
+						<li>
+							<button class="btn btn-primary" ng-click="focus()">关 注</button><strong>&nbsp;&nbsp;{{question.focus}}&nbsp;</strong>关注
+						</li>
+						<li class="mt-10">
+							<button class="btn btn-success" ng-click="collect()">收 藏</button><strong>&nbsp;&nbsp;{{question.collect}}&nbsp;</strong>收藏，<strong>&nbsp;{{question.view}}&nbsp;</strong>浏览
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				
+			</div>
+			<div class="col-md-3">
+				
+			</div>
+		</div>
+	</div>
+</div>

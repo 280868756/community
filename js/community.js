@@ -10,8 +10,9 @@ community.config(["$routeProvider",
 		$routeProvider.when("/community",{
 			templateUrl: 'templates/community.html',
 			controller: 'QuestionsController'
-		}).when('/community/question',{
-
+		}).when('/community/question/:questionId',{
+			templateUrl: 'templates/questionDetail.html',
+			controller: 'QuestionController'
 		}).otherwise({
 			redirectTo : '/community'
 		})
