@@ -45,9 +45,12 @@ communityControllers.controller('QuestionController',['$scope','$routeParams','Q
 		}
 		SimilarQuestionsService.query({questionId:$routeParams.questionId},function(data){
 			$scope.similarQuestions = data;
-		})
+		});
 		AnswersService.query({questionId:$routeParams.questionId},function(data){
 			$scope.answers = data;
 			$scope.answers.count = $scope.answers.length;
-		})
+		});
+		$scope.checkComment = function(){
+			console.log("-----------------");
+		}
 	}]);

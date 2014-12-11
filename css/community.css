@@ -156,12 +156,12 @@
 	border-bottom: 2px solid green;
 }
 .line{
-	margin:5px;
 	border-bottom: 1px solid green;
 }
 .comment{
 	margin-bottom:20px;
 }
 .content{
-	background-color: #eee;
+	/* left:55px;
+	background-color: #eee; */
 }
