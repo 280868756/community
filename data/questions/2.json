@@ -6,11 +6,13 @@
 	"author" : "LittleDouBi",
 	
 	"votes" : 1,
-	"answers" : 2,
+	"answers" : 0,
 	"view" : 4,
 	"focus" : 2,
 	"collect" : 3,
 
+	"solved" :true,
+	
 	"tags" : [
 		{
 			"label" : "javascipt"

@@ -11,6 +11,8 @@
 	"focus" : 2,
 	"collect" : 3,
 
+	"solved" :true,
+	
 	"tags" : [{
 			"label" : "java"
 		}]

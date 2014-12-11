@@ -10,6 +10,8 @@
 		"answers" : 3,
 		"view" : 4,
 
+		"solved" :true,
+
 		"tags" : [{
 				"label" : "javascipt"
 			},{
@@ -25,8 +27,10 @@
 		"author" : "LittleDouBi",
 		
 		"votes" : 1,
-		"answers" : 2,
+		"answers" : 1,
 		"view" : 4,
+
+		"solved" :true,
 
 		"tags" : [
 			{
@@ -45,8 +49,10 @@
 		"author" : "LittleDouBi",
 		
 		"votes" : 2,
-		"answers" : 3,
+		"answers" : 0,
 		"view" : 10,
+
+		"solved" :false,
 
 		"tags" : [{
 				"label" : "javascipt"
@@ -63,8 +69,10 @@
 		"author" : "LittleDouBi",
 		
 		"votes" : 5,
-		"answers" : 3,
+		"answers" : 0,
 		"view" : 9,
+
+		"solved" :false,
 
 		"tags" : [{
 				"label" : "java"
@@ -79,6 +87,8 @@
 		"votes" : 2,
 		"answers" : 4,
 		"view" : 7,
+
+		"solved" :false,
 
 		"tags" : [{
 				"label" : "java"
@@ -98,6 +108,8 @@
 		"answers" : 3,
 		"view" : 8,
 
+		"solved" :false,
+
 		"tags" : [{
 				"label" : "javascipt"
 			},{
@@ -116,6 +128,8 @@
 		"answers" : 3,
 		"view" : 9,
 
+		"solved" :true,
+
 		"tags" : [{
 				"label" : "java"
 			}]
@@ -127,8 +141,10 @@
 		"author" : "LittleDouBi",
 		
 		"votes" : 3,
-		"answers" : 1,
+		"answers" : 0,
 		"view" : 7,
+
+		"solved" :false,
 
 		"tags" : [{
 				"label" : "oracle"
@@ -143,6 +159,8 @@
 		"votes" : 0,
 		"answers" : 2,
 		"view" : 5,
+
+		"solved" :false,
 
 		"tags" : [{
 				"label" : "javascipt"

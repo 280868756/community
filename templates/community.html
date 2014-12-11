@@ -14,18 +14,19 @@
 				<div class="tab-content">
 					<div class="tab-pane active" data-toggle="tab" id="new" ng-controller="QuestionsController">
 						<div class="question-list-item" ng-repeat="question in questions">
-							<div question-item question= {{question}}></div>
+							<!-- <div question-item question= {{question}}></div> -->
+							<question-item></question-item>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div ng-controller="UserInfoController">
-					<div class="widget-box">
-						<a href="" class="widget-message-item">我的收藏</a>
-						<a href="" class="widget-message-item">我的关注</a>
-						<a href="" class="widget-message-item">我得提问</a>
-						<a href="" class="widget-message-item">我得文章</a>
+					<div class="first-widget-box">
+						<a href="">我的收藏</a>
+						<a href="">我的关注</a>
+						<a href="">我得提问</a>
+						<a href="">我得文章</a>
 					</div>
 					<div class="widget-box">
 						<h4>
@@ -50,8 +51,8 @@
 						<h4>
 							最近热议话题
 						</h4>
-						<ul class="list-inline">
-							<li class="tag-message" ng-repeat="question in hotInfo.questions"><a href="">{{question.title}}</a></li>
+						<ul class="list-inline li-block">
+							<li class="tag-message" ng-repeat="question in hotInfo.questions"><a href="#/community/question/{{question.id}}">{{question.title}}</a></li>
 						</ul>
 					</div>
 				</div>

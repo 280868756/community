@@ -2,7 +2,11 @@ var communityControllers = angular.module('communityControllers',[]);
 
 communityControllers.controller('QuestionsController',['$scope','QuestionsService',
 	function($scope,QuestionsService){
-		$scope.questions = QuestionsService.query();
+		$scope.questions = QuestionsService.query({},function(questions){
+			for(var i = 0; i < $scope.questions.length; i++){
+				$scope.questions[i].status = $scope.questions[i].solved? "解决" : "回答";
+			}
+		});
 	}]);
 
 communityControllers.controller('UserInfoController',['$scope','$http','UserInfoService',
@@ -21,13 +25,29 @@ communityControllers.controller('HotInfoController',['$scope','HotInfoService',
 		$scope.hotInfo = HotInfoService.get();
 	}]);
 
-communityControllers.controller('QuestionController',['$scope','$routeParams','QuestionService',
-	function($scope,$routeParams,QuestionService){
-		$scope.question = QuestionService.get({questionId:$routeParams.questionId});
+communityControllers.controller('QuestionController',['$scope','$routeParams','QuestionService','SimilarQuestionsService','AnswersService',
+	function($scope,$routeParams,QuestionService,SimilarQuestionsService,AnswersService){
+		QuestionService.get({questionId:$routeParams.questionId},function(question){
+			$scope.question = question;
+			$scope.question.view += 1;
+		});
 		$scope.focus = function(){
 			$scope.question.focus += 1; 
 		}
 		$scope.collect = function(){
 			$scope.question.collect += 1; 
 		}
+		$scope.addVote = function(){
+			$scope.question.votes += 1;
+		}
+		$scope.subVote = function(){
+			$scope.question.votes -= 1;
+		}
+		SimilarQuestionsService.query({questionId:$routeParams.questionId},function(data){
+			$scope.similarQuestions = data;
+		})
+		AnswersService.query({questionId:$routeParams.questionId},function(data){
+			$scope.answers = data;
+			$scope.answers.count = $scope.answers.length;
+		})
 	}]);

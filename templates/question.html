@@ -1,7 +1,7 @@
 <div class="rank">
-	<div class="votes"><span class="badge">{{question.votes}}</span><span class="rank-block">投票</span></div>
-	<div class="answers"><span class="badge">{{question.answers}}</span><span class="rank-block">回答</span></div>
-	<div class="view"><span class="badge">{{question.view}}</span><span class="rank-block">浏览</span></div>
+	<div class="votesNum"><span class="badge">{{question.votes}}</span><span class="rank-block">投票</span></div>
+	<div ng-class="{'answersNum': true,'q-solved':{{question.solved}}}"><span class="badge">{{question.answers}}</span><span class="rank-block">{{question.status}}</span></div>
+	<div class="viewNum"><span class="badge">{{question.view}}</span><span class="rank-block">浏览</span></div>
 </div>
 <div class="summary">
 	<div class="author">

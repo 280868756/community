@@ -21,3 +21,19 @@ communityServices.factory('QuestionService',['$resource',
   function($resource){
     return $resource('data/questions/:questionId.json');
   }]);
+
+communityServices.factory('SimilarQuestionsService',['$resource', 
+  function($resource){
+    return $resource('data/questions/:questionId:format',{
+      questionId : "@questionId",
+      format : "_similar.json"
+    });
+  }]);
+
+communityServices.factory('AnswersService',['$resource', 
+  function($resource){
+    return $resource('data/questions/:questionId:format',{
+      questionId : "@questionId",
+      format : "_answers.json"
+    });
+  }]);
