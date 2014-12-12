@@ -47,26 +47,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="answers">
+				<div class="answers" ng-controller="AnswersController">
 					<div class="answers-Num">{{answers.count}}个回答</div>
-					<div class="answer" ng-repeat="answer in answers">
-						<div class="console-button">
-							<div class="vote-btn vote-btn-up" ng-click="addVote()"></div>
-							<div class="vote-count" ng-bind="question.votes"></div>
-							<div class="vote-btn vote-btn-down" ng-click="subVote()"></div>
-						</div>
-						<div class="ahthor">
-							<a class="custom-a-none" href="">{{answer.author}}</a>
-							<span>&nbsp;&nbsp;{{answer.date}}&nbsp;&nbsp;</span>回答
-						</div>
-						<div class="content">
-							<p>{{answer.content}}</p>
-						</div>
-						<div class="comment">
-							<a href="javascript:void(0)" ng-click="checkComment()">0评论</a>
-						</div>
-						<div class="line"></div>
+					<div class="answer" ng-repeat="answer in answers" ng-modal="answer">
+						<answer-item></answer-item>
 					</div>
+					<h3>撰写答案</h3>
+					
 				</div>
 			</div>
 			<div class="col-md-3">

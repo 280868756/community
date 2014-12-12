@@ -9,3 +9,11 @@ communityDirectives.directive('questionItem',
 			templateUrl: 'templates/question.html'
 		}
 	});
+
+communityDirectives.directive('answerItem',
+	function(){
+		return {
+			restrict : 'EA',
+			templateUrl : 'TEMPLATES/answer.html'
+		}
+	});

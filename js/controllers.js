@@ -25,32 +25,73 @@ communityControllers.controller('HotInfoController',['$scope','HotInfoService',
 		$scope.hotInfo = HotInfoService.get();
 	}]);
 
-communityControllers.controller('QuestionController',['$scope','$routeParams','QuestionService','SimilarQuestionsService','AnswersService',
-	function($scope,$routeParams,QuestionService,SimilarQuestionsService,AnswersService){
+communityControllers.controller('QuestionController',['$scope','$routeParams','QuestionService','SimilarQuestionsService',
+	function($scope,$routeParams,QuestionService,SimilarQuestionsService){
 		QuestionService.get({questionId:$routeParams.questionId},function(question){
 			$scope.question = question;
 			$scope.question.view += 1;
 		});
 		$scope.focus = function(){
-			$scope.question.focus += 1; 
+			$scope.question.focus += 1;
+			//TODO SVAE 
+			/*QuestionService.$save(
+				{questionId:$routeParams.questionId},
+				{focus:$scope.question.focus}
+				,
+				function(data){
+					QuestionService.get({questionId:$routeParams.questionId},function(question){
+						console.log(question.focus);
+					});
+				},
+				function(error){
+					console.log(error);
+				}
+			);*/
 		}
 		$scope.collect = function(){
 			$scope.question.collect += 1; 
+			//TODO SVAE
 		}
 		$scope.addVote = function(){
 			$scope.question.votes += 1;
+			//TODO SVAE
 		}
 		$scope.subVote = function(){
 			$scope.question.votes -= 1;
+			//TODO SVAE
 		}
 		SimilarQuestionsService.query({questionId:$routeParams.questionId},function(data){
 			$scope.similarQuestions = data;
 		});
+		
+	}]);
+
+communityControllers.controller('AnswersController',['$scope','$routeParams','AnswersService',
+	function($scope,$routeParams,AnswersService){
 		AnswersService.query({questionId:$routeParams.questionId},function(data){
 			$scope.answers = data;
 			$scope.answers.count = $scope.answers.length;
 		});
 		$scope.checkComment = function(){
 			console.log("-----------------");
+		}
+		$scope.addVote = function(answer){
+			answer.votes += 1;
+			//TODO SVAE
+		}
+		$scope.subVote = function(answer){
+			answer.votes -= 1;
+			//TODO SVAE
+		}
+	}]);
+
+communityControllers.controller('CommentsController',['$scope','$routeParams','CommentsService',
+	function($scope,$routeParams,CommentsService){
+		CommentsService.query({answerId:$scope.answer.answerId},function(data){
+			$scope.commons = data;
+		})
+		$scope.showComments = false;
+		$scope.checkComment = function(){
+			$scope.showComments = !$scope.showComments;
 		}
 	}]);

@@ -32,8 +32,14 @@ communityServices.factory('SimilarQuestionsService',['$resource',
 
 communityServices.factory('AnswersService',['$resource', 
   function($resource){
-    return $resource('data/questions/:questionId:format',{
-      questionId : "@questionId",
-      format : "_answers.json"
+    return $resource('data/answers/:questionId.json',{
+      questionId : "@questionId"
+    });
+  }]);
+
+communityServices.factory('CommentsService',['$resource', 
+  function($resource){
+    return $resource('data/commons/:answerId.json',{
+      answers: "@answerId"
     });
   }]);

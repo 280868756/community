@@ -1,0 +1,11 @@
+[
+	{
+		"auhtor" : "SB",
+		"toUser" : "boom",
+		"content" : "什么乱七八糟的"
+	},{
+		"auhtor" : "DSB",
+		"toUser" : "SB",
+		"content" : "你...什么...乱七八糟的..."
+	}
+]

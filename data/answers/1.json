@@ -1,0 +1,27 @@
+[
+	{
+		"answerId" : "11",
+		"author":"boom",
+		"date": "2014.12.11 15:00",
+
+		"votes" : 2,
+
+		"content" : "老鼠爱大米"
+	},{
+		"answerId" : "12",
+		"author":"ji_linag",
+		"date": "2014.12.11 16:00",
+
+		"votes" : 1,
+
+		"content" : "小鸡爱小米"
+	},{
+		"answerId" : "13",
+		"author":"sao_qing",
+		"date": "2014.12.12 9:00",
+
+		"votes" : 0,
+
+		"content" : "monkey love banana"
+	}
+]
