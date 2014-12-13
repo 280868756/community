@@ -38,7 +38,7 @@
 	color:#008E59;
 }
 /* 自定义a标签：hover时decoration为none */
-.custom-a-none:hover{
+.custom-a-none:hover,:visited,:active{
 	text-decoration:none;
 }
 .tag-label{
@@ -119,6 +119,13 @@
 	position: relative;
 	margin-right:15px;
 }
+/*.answer-content{
+	background-color: #eee;
+	position: relative;
+	left: 55px;
+	margin-right: 55px;
+
+}*/
 .vote-btn{
 	height: 20px;
 	width: 100%;
@@ -156,12 +163,32 @@
 	border-bottom: 2px solid green;
 }
 .line{
+	margin-top:20px;
 	border-bottom: 1px solid green;
 }
 .comment{
-	margin-bottom:20px;
+	position: relative;
+	left: 55px;
+	margin-right: 55px;
+	padding: 10px;
+	background-color: #eee;
+	word-wrap:break-word;
 }
-.content{
-	/* left:55px;
-	background-color: #eee; */
+.comment-line{
+	margin: 10px 0;
+	border-bottom: 1px dashed #999;
+}
+.reply{
+	color: #53A184;
+}
+.reply:hover{
+	color: #5D6C66;
+	cursor: pointer;
+}
+.userName{
+	color: #008E59;
+	font-weight: bolder;
+}
+.comment-input{
+	width:100%;
 }

@@ -4,16 +4,36 @@
 	<div class="vote-btn vote-btn-down" ng-click="subVote(answer)"></div>
 </div>
 <div class="ahthor">
-	<a class="custom-a-none" href="">{{answer.author}}</a>
+	<a class="custom-a-none userName" href="">{{answer.author}}</a>
 	<span>&nbsp;&nbsp;{{answer.date}}&nbsp;&nbsp;</span>回答
 </div>
 <div class="content">
 	<p>{{answer.content}}</p>
 </div>
-<div class="comment" ng-controller="CommentsController">
-	<a href="javascript:void(0)" ng-click="checkComment()">0评论</a>
-	<div ng-show="showComments">
-		123
+<div ng-controller="CommentsController">
+	<a href="javascript:void(0)" ng-click="checkComment()">{{comments.length}}评论</a>
+	<div ng-show="showComments" class="comment">
+		<div ng-repeat="comment in comments">
+			<small>回复:</small><a ng-href="#" class="custom-a-none userName">{{comment.toUser}}</a>
+			<p ng-bind="comment.content"></p>
+			<span>{{comment.floor | floorFilter}}</span>
+			<a ng-href="#" class="custom-a-none userName">{{comment.author}}</a>
+			<span>{{comment.date | date:"yyyy-mm-dd" | commentDateFilter}}</span>
+			<small class="reply" ng-click="replyClick(comment)">回复</small>
+			<div class="comment-line"></div>
+		</div>
+		<div ng-show="showReply">
+			<small>回复:<span class="userName">{{comment.author}}</span></small>
+		</div>
+		<div class="row">
+			<div class="col-md-10">
+				<textarea class="comment-input"></textarea>
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-primary">提交评论</button>
+			</div>
+		</div>
 	</div>
+	
 </div>
 <div class="line"></div>

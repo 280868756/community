@@ -9,7 +9,7 @@
 					</div>
 					<h2 class="title">{{question.title}}</h2>
 					<div class="pt-10">
-						<a class="custom-a-none" href="">{{question.author}}</a>
+						<a class="custom-a-none userName" href="">{{question.author}}</a>
 						<span>&nbsp;&nbsp;提问于&nbsp;&nbsp;</span>
 						<span>{{question.date}}</span>
 					</div>
@@ -48,7 +48,7 @@
 					</div>
 				</div>
 				<div class="answers" ng-controller="AnswersController">
-					<div class="answers-Num">{{answers.count}}个回答</div>
+					<div class="answers-Num">{{answers.length}}个回答</div>
 					<div class="answer" ng-repeat="answer in answers" ng-modal="answer">
 						<answer-item></answer-item>
 					</div>

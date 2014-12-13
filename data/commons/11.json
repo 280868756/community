@@ -1,11 +1,17 @@
 [
 	{
-		"auhtor" : "SB",
+		"author" : "SB",
 		"toUser" : "boom",
-		"content" : "什么乱七八糟的"
+		"content" : "什么乱七八糟的",
+		"floor" : 1,
+
+		"date" : "2014/12/13"
 	},{
-		"auhtor" : "DSB",
+		"author" : "DSB",
 		"toUser" : "SB",
-		"content" : "你...什么...乱七八糟的..."
+		"content" : "你...什么...乱七八糟的...",
+		"floor" : 2,
+
+		"date" : "2014/12/13"
 	}
 ]

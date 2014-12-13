@@ -2,7 +2,8 @@ var community = angular.module('community', [
 		"ngRoute",
 		"communityControllers",
 		"communityServices",
-		"communityDirectives"
+		"communityDirectives",
+		"communityFilters"
 	]);
 
 community.config(["$routeProvider", 
