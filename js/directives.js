@@ -17,3 +17,19 @@ communityDirectives.directive('answerItem',
 			templateUrl : 'TEMPLATES/answer.html'
 		}
 	});
+
+// communityDirectives.directive('setActive',
+// 	function(){
+// 		return{
+// 			restrict : "A",
+// 			link : function(scope,ielme,iattr){
+// 				$(ielme).bind('click',function(e){
+// 					ielme.css('background-color','red');
+// 					ielme.addClass('tabActive');
+// 					console.log(ielme);
+// 					$(this).nextAll().removeClass('tabActive')
+// 					$(this).prevAll().removeClass('tabActive');
+// 				})
+// 			}
+// 		}
+// 	});

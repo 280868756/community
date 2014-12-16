@@ -1,0 +1,46 @@
+<div class="warp" ng-controller="UserInfoController">
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2">
+					<div class="userHeadImg">
+						<img ng-src="{{userInfo.headImg}}"></img>
+					</div>
+				</div>
+				<div class="col-md-7">
+					<h3>{{userInfo.username}}</h3>
+					<h4>部门：{{userInfo.department}}</h4>
+				</div>
+				<div class="col-md-3 pt-30">
+					<button class="btn btn-primary">+加关注</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<!-- <ul class="nav nav-tabs">
+				  	<li class="active"><a href="#question" data-toggle="tab">提问</a></li>
+				  	<li><a href="#collect" data-toggle="tab">收藏</a></li>
+				 	<li><a href="#focus" data-toggle="tab">关注</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="question">
+						active
+					</div>
+					<div class="tab-pane" id="collect">
+						hot
+					</div>
+					<div class="tab-pane" id="focus">
+						unanswered
+					</div>
+				</div> -->
+			</div>
+			<div class="col-md-3">
+				<h3>Ta的关系</h3>
+				<hr>
+			</div>
+		</div>
+	</div>
+</div>

@@ -116,3 +116,4 @@ communityControllers.controller('CommentsController', ['$scope', '$routeParams',
 		$scope.showReply = false;
 	}
 ]);
+

@@ -1,5 +1,7 @@
 {
 	"username" : "LittleDouBi",
+	"department" : "研发部",
+	"headImg" : "/img/headImg.jpg",
 	"questions" : [
 		{
 			"id" : 1,
@@ -78,6 +80,10 @@
 
 	],
 	"collect" : [
-	]
+	],
+	"fans" : [
 
+	],
+	"focusUsers" : [
+	]
 }

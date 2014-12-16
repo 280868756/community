@@ -9,7 +9,7 @@ communityServices.factory('QuestionsService',['$resource',
 
 communityServices.factory('UserInfoService',['$resource', 
 	function($resource){
-		return $resource('data/:userName.json', {userName:'@userName'});
+		return $resource('data/users/:userName.json', {userName:'@userName'});
 	}]);
 
 communityServices.factory('HotInfoService',['$resource', 
