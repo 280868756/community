@@ -107,6 +107,9 @@
 .mt-15{
 	margin-top: 15px;
 }
+.mb-10{
+	margin-bottom: 10px;
+}
 .question-date{
 	color: #428BCA;
 }
@@ -219,12 +222,10 @@
 .cus-btn:active{
 	background-color: #008E59;
 }
-.tabActive > a,
-.tabActive > a:hover,
-.tabActive > a:focus {
-	color: #555555;
-	cursor: default;
-	background-color: #ffffff;
-	border: 1px solid #dddddd;
-	border-bottom-color: transparent;
+.cus-tab-title{
+	margin-top: 15px;
+}
+.person-num{
+	color: rgb(125, 99, 189);
+	font-weight: bold;
 }

@@ -1,26 +1,24 @@
 <div class="wrap">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-9">
+			<div class="col-md-9" ng-controller="QuestionsController">
 				<div class="main-title">
 					今天您遇到了什么问题呢？
 					<a href="#" class="btn btn-primary">我要提问</a>
 				</div>
-				<ul class="nav nav-tabs">
-				  	<li class="active"><a href="#new" data-toggle="tab">最新的</a></li>
-				  	<li><a href="#hot" data-toggle="tab">热门的</a></li>
-				 	<li><a href="#unanswered" data-toggle="tab">未回答的</a></li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane active" id="new" ng-controller="QuestionsController">
-						<div class="question-list-item" ng-repeat="question in questions">
-							<!-- <div question-item question= {{question}}></div> -->
-							<question-item></question-item>
-						</div>
-					</div>
-					<div class="tab-pane" id="hot">热门的内容</div>
-					<div class="tab-pane" id="unanswered">222</div>
+				<div class="btn-group">
+				 	<button class="btn btn-success" type="button" ng-click="tab=1">最新的</button>
+				 	<button class="btn btn-success" type="button" ng-click="tab=2">热门的</button>
+				 	<button class="btn btn-success" type="button" ng-click="tab=3">未回答的</button>
 				</div>
+				<hr>
+				<div ng-show="tab==1">
+					<div class="question-list-item" ng-repeat="question in questions">
+						<question-item></question-item>
+					</div>
+				</div>
+				<div ng-show="tab==2">热门的内容</div>
+				<div ng-show="tab==3">222</div>
 			</div>
 			<div class="col-md-3">
 				<div ng-controller="UserInfoController">

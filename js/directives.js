@@ -33,3 +33,14 @@ communityDirectives.directive('answerItem',
 // 			}
 // 		}
 // 	});
+
+communityDirectives.directive('imgLayer',
+	function(){
+		return {
+			template:'<div style="width:200px;height:100px;z-index:999;background-color:#ddd;"></div>',
+			restrict:'A',
+			link : function(scope,ielme,iattr){
+				console.log(ielme);
+			}
+		}
+	});

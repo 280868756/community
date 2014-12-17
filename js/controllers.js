@@ -2,6 +2,7 @@ var communityControllers = angular.module('communityControllers', []);
 
 communityControllers.controller('QuestionsController', ['$scope', 'QuestionsService',
 	function($scope, QuestionsService) {
+		$scope.tab = 1;
 		$scope.questions = QuestionsService.query({}, function(questions) {
 			for (var i = 0; i < $scope.questions.length; i++) {
 				$scope.questions[i].status = $scope.questions[i].solved ? "解决" : "回答";
@@ -10,11 +11,11 @@ communityControllers.controller('QuestionsController', ['$scope', 'QuestionsServ
 	}
 ]);
 
-communityControllers.controller('UserInfoController', ['$scope', '$http', 'UserInfoService',
-	function($scope, $http, UserInfoService) {
+communityControllers.controller('UserInfoController', ['$scope', '$http', '$routeParams','UserInfoService',
+	function($scope, $http, $routeParams, UserInfoService) {
 		//这个参数可以在路由的时候传进来$routeParams
 		$scope.userInfo = UserInfoService.get({
-			userName: 'LittleDouBi'
+			userName: $routeParams.userName
 		});
 		//两种方式，用$http也可以
 		// $http({method : 'GET',url : 'data/LittleDouBi.json'}).success(function(data){
@@ -117,3 +118,27 @@ communityControllers.controller('CommentsController', ['$scope', '$routeParams',
 	}
 ]);
 
+communityControllers.controller('UserQuestionsController',['$scope','$routeParams','UserInfoService',
+	function($scope,$routeParams,UserInfoService){
+		$scope.tab = 1;
+		UserInfoService.query({questions: 'questions',userName: $routeParams.userName},function(date){
+			$scope.questions = date;
+			for (var i = 0; i < $scope.questions.length; i++) {
+				$scope.questions[i].status = $scope.questions[i].solved ? "解决" : "回答";
+			}
+		},function(error){
+			console.log(error);
+		});
+	}
+]);
+
+communityControllers.controller('RelationshipController',['$scope', '$routeParams','UserInfoService',
+	function($scope,$routeParams,UserInfoService){
+		UserInfoService.get({relationship:'relationship',userName:$routeParams.userName},function(date){
+			$scope.fans = date.fans;
+			$scope.focuses = date.focuses;
+		},function(error){
+			console.log(error);
+		})
+	}
+]);

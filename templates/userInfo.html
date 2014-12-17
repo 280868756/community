@@ -19,27 +19,45 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-9">
-				<!-- <ul class="nav nav-tabs">
-				  	<li class="active"><a href="#question" data-toggle="tab">提问</a></li>
-				  	<li><a href="#collect" data-toggle="tab">收藏</a></li>
-				 	<li><a href="#focus" data-toggle="tab">关注</a></li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane active" id="question">
-						active
+			<div class="col-md-9" ng-controller="UserQuestionsController">
+				<div class="btn-group cus-tab-title">
+				 	<button class="btn btn-success" type="button" ng-click="tab=1">提问</button>
+				 	<button class="btn btn-success" type="button" ng-click="tab=2">收藏</button>
+				 	<button class="btn btn-success" type="button" ng-click="tab=3">关注</button>
+				</div>
+				<hr>
+				<div ng-show="tab==1">
+					<div class="question-list-item" ng-repeat="question in questions">
+						<question-item></question-item>
 					</div>
-					<div class="tab-pane" id="collect">
-						hot
-					</div>
-					<div class="tab-pane" id="focus">
-						unanswered
-					</div>
-				</div> -->
+				</div>
+				<div ng-show="tab==2">
+					111
+				</div>
+				<div ng-show="tab==3">
+					222
+				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3" ng-controller="RelationshipController">
 				<h3>Ta的关系</h3>
 				<hr>
+				<div>
+					<p>关注:<span class="person-num">{{focuses.length}}</span>人</p>
+					<ul class="list-inline">
+						<li class="mb-10" ng-repeat="focus in focuses">
+							<a href="#/community/userInfo/{{focus.username}}"><img ng-src="{{focus.smallHeadImg}}"></img></a>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<p>粉丝:<span class="person-num">{{fans.length}}</span>人</p>
+					<ul class="list-inline">
+						<li class="mb-10" ng-repeat="fan in fans">
+							<a href="#/community/userInfo/{{fan.username}}">
+								<img ng-src="{{fan.smallHeadImg}}" img-layer></img></a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

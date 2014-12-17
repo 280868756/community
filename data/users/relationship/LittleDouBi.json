@@ -1,0 +1,32 @@
+{
+	"fans" : [
+		{
+			"username" : "boom",
+			"smallHeadImg" : "/img/small.png"
+		},{
+			"username" : "ji_linag",
+			"smallHeadImg" : "/img/small.png"
+		},{
+			"username" : "sao_qing",
+			"smallHeadImg" : "/img/small.png"
+		},{
+			"username" : "boom4",
+			"smallHeadImg" : "/img/small.png"
+		}
+	],
+	"focuses" : [
+		{
+			"username" : "boom",
+			"smallHeadImg" : "/img/small.png"
+		},{
+			"username" : "ji_linag",
+			"smallHeadImg" : "/img/small.png"
+		},{
+			"username" : "sao_qing",
+			"smallHeadImg" : "/img/small.png"
+		},{
+			"username" : "boom8",
+			"smallHeadImg" : "/img/small.png"
+		}
+	]
+}
