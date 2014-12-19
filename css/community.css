@@ -229,3 +229,17 @@
 	color: rgb(125, 99, 189);
 	font-weight: bold;
 }
+.imgLayer{
+	position:absolute;
+	width:200px;
+	height:100px;
+	z-index:999;
+	background-color:red;
+}
+.headImg-name{
+	width:60px;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

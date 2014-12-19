@@ -2,17 +2,21 @@
 	"username" : "LittleDouBi",
 	"department" : "研发部",
 	"headImg" : "/img/headImg.jpg",
-	"questions" : [
-		
-	],
-	"answers" : [
-
-	],
-	"collect" : [
-	],
-	"fans" : [
-
-	],
-	"focusUsers" : [
+	"focusTags" : [
+		{
+			"label" : "javascript"
+		},{
+			"label" : "node.js"
+		},{
+			"label" : "java"
+		},{
+			"label" : "angularJS"
+		},{
+			"label" : "bootstrap"
+		},{
+			"label" : "less"
+		},{
+			"label" : "grunt"
+		}
 	]
 }

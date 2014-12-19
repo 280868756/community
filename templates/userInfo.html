@@ -23,7 +23,7 @@
 				<div class="btn-group cus-tab-title">
 				 	<button class="btn btn-success" type="button" ng-click="tab=1">提问</button>
 				 	<button class="btn btn-success" type="button" ng-click="tab=2">收藏</button>
-				 	<button class="btn btn-success" type="button" ng-click="tab=3">关注</button>
+				 	<!-- <button class="btn btn-success" type="button" ng-click="tab=3">关注</button> -->
 				</div>
 				<hr>
 				<div ng-show="tab==1">
@@ -45,7 +45,10 @@
 					<p>关注:<span class="person-num">{{focuses.length}}</span>人</p>
 					<ul class="list-inline">
 						<li class="mb-10" ng-repeat="focus in focuses">
-							<a href="#/community/userInfo/{{focus.username}}"><img ng-src="{{focus.smallHeadImg}}"></img></a>
+							<a href="#/community/userInfo/{{focus.username}}">
+								<img ng-src="{{focus.smallHeadImg}}"></img>
+								<p class="headImg-name userName">{{focus.username}}</p>	
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -54,7 +57,9 @@
 					<ul class="list-inline">
 						<li class="mb-10" ng-repeat="fan in fans">
 							<a href="#/community/userInfo/{{fan.username}}">
-								<img ng-src="{{fan.smallHeadImg}}" img-layer></img></a>
+								<img ng-src="{{fan.smallHeadImg}}"></img>
+							</a>
+							<p class="headImg-name userName">{{fan.username}}</p>
 						</li>
 					</ul>
 				</div>
