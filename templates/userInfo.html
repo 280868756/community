@@ -1,18 +1,21 @@
-<div class="warp" ng-controller="UserInfoController">
+<div class="warp">
 	<div class="header">
+		<pub-nav></pub-nav>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-2">
 					<div class="userHeadImg">
-						<img ng-src="{{userInfo.headImg}}"></img>
+						<img ng-src="{{userInfo.bigImg}}"></img>
 					</div>
 				</div>
 				<div class="col-md-7">
-					<h3>{{userInfo.username}}</h3>
-					<h4>éƒ¨é—¨ï¼š{{userInfo.department}}</h4>
+					<h3>{{userInfo.userId}}</h3>
+					<!-- <h4>²¿ÃÅ£º{{userInfo.department}}</h4> -->
 				</div>
 				<div class="col-md-3 pt-30">
-					<button class="btn btn-primary">+åŠ å…³æ³¨</button>
+					<button class="btn btn-success" ng-show="showFocus && canFocus" ng-click="setFocus()">+¼Ó¹Ø×¢</button>
+					<button class="btn btn-success" ng-show="showFocus && !canFocus" ng-click="cancelFocus()">È¡Ïû¹Ø×¢</button>
+					<button class="btn btn-primary" ng-show="userInfo.userId == nav_userName" ng-click="uploadImg()">ÉÏ´«Í¼Æ¬</button>
 				</div>
 			</div>
 		</div>
@@ -21,49 +24,51 @@
 		<div class="row">
 			<div class="col-md-9" ng-controller="UserQuestionsController">
 				<div class="btn-group cus-tab-title">
-				 	<button class="btn btn-success" type="button" ng-click="tab=1">æé—®</button>
-				 	<button class="btn btn-success" type="button" ng-click="tab=2">æ”¶è—</button>
-				 	<!-- <button class="btn btn-success" type="button" ng-click="tab=3">å…³æ³¨</button> -->
+				 	<div class="btn" ng-class="{'btn-warning':activedTabId==askTabId,'btn-success':activedTabId!=askTabId}" type="button" ng-click="tabClick(askTabId)">ÌáÎÊ</div>
+				 	<div class="btn" ng-class="{'btn-warning':activedTabId==collectTabId,'btn-success':activedTabId!=collectTabId}" type="button" ng-click="tabClick(collectTabId)">ÊÕ²Ø</div>
 				</div>
 				<hr>
-				<div ng-show="tab==1">
-					<div class="question-list-item" ng-repeat="question in questions">
+				<div ng-show="activedTabId==askTabId">
+					<div class="question-list-item" ng-repeat="question in createdQuestions">
 						<question-item></question-item>
 					</div>
+					<!-- <pagination id="1" get-page-size-action="getAskQuesPageInfo" change-page="changePage(askTabId,curPageNum)"></pagination> -->
 				</div>
-				<div ng-show="tab==2">
-					111
-				</div>
-				<div ng-show="tab==3">
-					222
+				<div ng-show="activedTabId==collectTabId">
+					<div class="question-list-item" ng-repeat="question in collectedQuestions">
+						<question-item></question-item>
+					</div>
+					<!-- <pagination id="2" get-page-size-action="getCollectedQuesPageInfo" change-page="changePage(collectTabId,curPageNum)"></pagination> -->
 				</div>
 			</div>
-			<div class="col-md-3" ng-controller="RelationshipController">
-				<h3>Taçš„å…³ç³»</h3>
+			<div class="col-md-3">
+				<h3>TaµÄ¹ØÏµ</h3>
 				<hr>
 				<div>
-					<p>å…³æ³¨:<span class="person-num">{{focuses.length}}</span>äºº</p>
+					<p>¹Ø×¢:<span class="person-num">{{focuses.length}}</span>ÈË</p>
 					<ul class="list-inline">
 						<li class="mb-10" ng-repeat="focus in focuses">
-							<a href="#/community/userInfo/{{focus.username}}">
-								<img ng-src="{{focus.smallHeadImg}}"></img>
-								<p class="headImg-name userName">{{focus.username}}</p>	
+							<a href="#/community/userInfo/{{focus.userId}}">
+								<img ng-src="{{focus.smallImg}}"></img>
 							</a>
+							<p class="headImg-name userName">{{focus.userId}}</p>
 						</li>
 					</ul>
 				</div>
+				<hr>
 				<div>
-					<p>ç²‰ä¸:<span class="person-num">{{fans.length}}</span>äºº</p>
+					<p>·ÛË¿:<span class="person-num">{{fans.length}}</span>ÈË</p>
 					<ul class="list-inline">
 						<li class="mb-10" ng-repeat="fan in fans">
-							<a href="#/community/userInfo/{{fan.username}}">
-								<img ng-src="{{fan.smallHeadImg}}"></img>
+							<a href="#/community/userInfo/{{fan.userId}}">
+								<img ng-src="{{fan.smallImg}}"></img>
 							</a>
-							<p class="headImg-name userName">{{fan.username}}</p>
+							<p class="headImg-name userName">{{fan.userId}}</p>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
+	<upload-headimg-dialog></upload-headimg-dialog>
 </div>

@@ -1,58 +1,81 @@
 <div class="wrap">
+	<pub-nav></pub-nav>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-9" ng-controller="QuestionsController">
+			<div class="col-md-9">
 				<div class="main-title">
-					ä»Šå¤©æ‚¨é‡åˆ°äº†ä»€ä¹ˆé—®é¢˜å‘¢ï¼Ÿ
-					<a href="#" class="btn btn-primary">æˆ‘è¦æé—®</a>
+					Ê¹ÓÃUEP¿ª·¢Óöµ½ÎÊÌâÁËÂð£¿
+					<a href="#/community/askQuestion" class="btn btn-primary">ÎÒÒªÌáÎÊ</a>
 				</div>
 				<div class="btn-group">
-				 	<button class="btn btn-success" type="button" ng-click="tab=1">æœ€æ–°çš„</button>
-				 	<button class="btn btn-success" type="button" ng-click="tab=2">çƒ­é—¨çš„</button>
-				 	<button class="btn btn-success" type="button" ng-click="tab=3">æœªå›žç­”çš„</button>
+				 	<div class="btn" ng-class="{'btn-warning':activedTabId==newTabId,'btn-success':activedTabId!=newTabId}" type="button" ng-click="tabClick(newTabId)">×îÐÂµÄ</div>
+				 	<div class="btn" ng-class="{'btn-warning':activedTabId==hotTabId,'btn-success':activedTabId!=hotTabId}" type="button" ng-click="tabClick(hotTabId)">ÈÈÃÅµÄ</div>
+				 	<div class="btn" ng-class="{'btn-warning':activedTabId==unsolvedTabId,'btn-success':activedTabId!=unsolvedTabId}" type="button" ng-click="tabClick(unsolvedTabId)">Î´½â¾öµÄ</div>
 				</div>
-				<hr>
-				<div ng-show="tab==1">
-					<div class="question-list-item" ng-repeat="question in questions">
+				<!-- <hr> -->
+				<div ng-show="activedTabId==newTabId">
+					<div class="question-list-item" ng-repeat="question in newQuestions">
 						<question-item></question-item>
 					</div>
+					<pagination id="1" get-page-size-action="getAllQuesPageInfo" change-page="changePage(newTabId,curPageNum)"></pagination>
+					<!-- ÕâÀï×îºÃÊÇ²»´«µÝid£¬¿ÉÒÔ´«µÝÒ»¸öparam¶ÔÏó£¬°üº¬ÁËchangePage()ËùÐèÒªµÄËùÓÐ²ÎÊý -->
 				</div>
-				<div ng-show="tab==2">çƒ­é—¨çš„å†…å®¹</div>
-				<div ng-show="tab==3">222</div>
+				<div ng-show="activedTabId==hotTabId">
+					<div class="question-list-item" ng-repeat="question in collectedQuestions">
+						<question-item></question-item>
+					</div>
+					<pagination id="2" get-page-size-action="getCollectedQuesPageInfo" change-page="changePage(hotTabId,curPageNum)"></pagination>
+				</div>
+				<div ng-show="activedTabId==unsolvedTabId">
+					<div class="question-list-item" ng-repeat="question in unsolvedQuestions">
+						<question-item></question-item>
+					</div>
+					<pagination id="3" get-page-size-action="getUnSolvedQuesPageInfo" change-page="changePage(unsolvedTabId,curPageNum)"></pagination>
+				</div>
 			</div>
 			<div class="col-md-3">
-				<div ng-controller="UserInfoController">
+				<div>
+					<div class="widget-welcome">
+						<h4 class="title">
+							¿ª·¢ÕßÉçÇø¹«¸æ
+						</h4>
+						<p>UEP¿ª·¢¼¼ÊõÎÊ´ðºÍ½»Á÷ÉçÇø£¬´ó¼Ò»¥Ïà°ïÖú£¬Ò»ÆðÇÐ´è£¬¹²Í¬Ìá¸ß¡£</p>
+					</div>
+				</div>
+				<div class="widget-box">
+					<input class="search-box" ng-model="searchInfo"></input>
+					<button class="btn btn-success" ng-click="searchQuestions()">ËÑË÷</button>
+				</div>
+				<!-- <div ng-controller="UserInfoController" ng-show="nav_hasLogin">
 					<div class="first-widget-box">
-						<a href="">æˆ‘çš„æ”¶è—</a>
-						<a href="">æˆ‘çš„å…³æ³¨</a>
-						<a href="">æˆ‘å¾—æé—®</a>
-						<a href="">æˆ‘å¾—æ–‡ç« </a>
+						<a href="">ÎÒµÄÊÕ²Ø</a>
+						<a href="">ÎÒµÃÌáÎÊ</a>
 					</div>
 					<div class="widget-box">
 						<h4>
-							å…³æ³¨æ ‡ç­¾ï¼š
+							¹Ø×¢±êÇ©£º
 						</h4>
 						<ul class="list-inline">
 							<li class="tag-label" ng-repeat="tag in userInfo.focusTags"><a href="" class="custom-a-white custom-a-none">{{tag.label}}</a></li>
 						</ul>
 					</div>
-				</div>
-				<div  ng-controller="HotInfoController">
+				</div> -->
+				<div>
 					<div class="widget-box">
 						<h4>
-							çƒ­è®®æ ‡ç­¾
-							<a href="" style="text-decoration:none">ã€‹</a>
+							{{showTitle}}
+							<!-- <a href="" style="text-decoration:none" ng-click="getAllTags()" ng-show="expendFlag">>></a> -->
 						</h4>
 						<ul class="list-inline">
-							<li class="tag-label" ng-repeat="tag in hotInfo.tags"><a href="" class="custom-a-white custom-a-none">{{tag.label}}</a></li>
+							<li class="tag-label" ng-repeat="tag in hotTags"><a href="#/community/index.html" class="custom-a-none" ng-click="tagClick(tag.name)">{{tag.name}}</a></li>
 						</ul>
 					</div>
 					<div class="widget-box">
 						<h4>
-							æœ€è¿‘çƒ­è®®è¯é¢˜
+							×î½üÈÈÒé»°Ìâ
 						</h4>
 						<ul class="list-inline li-block">
-							<li class="tag-message" ng-repeat="question in hotInfo.questions"><a href="#/community/question/{{question.id}}">{{question.title}}</a></li>
+							<li class="tag-message" ng-repeat="question in hotQuestions"><a href="#/community/question/{{question.id}}">{{question.title}}</a></li>
 						</ul>
 					</div>
 				</div>

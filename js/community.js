@@ -1,5 +1,6 @@
 var community = angular.module('community', [
 		"ngRoute",
+		"ngCookies",
 		"communityControllers",
 		"communityServices",
 		"communityDirectives",
@@ -11,6 +12,9 @@ community.config(["$routeProvider",
 		$routeProvider.when("/community",{
 			templateUrl: 'templates/community.html',
 			controller: 'QuestionsController'
+		}).when('/community/askQuestion',{
+			templateUrl: 'templates/ask.html',
+			controller: 'askController'
 		}).when('/community/question/:questionId',{
 			templateUrl: 'templates/questionDetail.html',
 			controller: 'QuestionController'
@@ -21,3 +25,8 @@ community.config(["$routeProvider",
 			redirectTo : '/community'
 		})
 	}]);
+	
+community.value('searchParam',{
+	searchTag:"",
+	searchInfo:""
+});

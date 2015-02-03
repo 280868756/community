@@ -1,17 +1,23 @@
 <div class="rank">
-	<div class="votesNum"><span class="badge">{{question.votes}}</span><span class="rank-block">æŠ•ç¥¨</span></div>
-	<div ng-class="{'answersNum': true,'q-solved':{{question.solved}}}"><span class="badge">{{question.answers}}</span><span class="rank-block">{{question.status}}</span></div>
-	<div class="viewNum"><span class="badge">{{question.view}}</span><span class="rank-block">æµè§ˆ</span></div>
+	<div class="votesNum"><span>{{question.voteNum}}</span><span class="rank-block">Í¶Æ±</span></div>
+	<div class="{{question.status_class}} answersNum">
+		<span>{{question.answerNum}}</span><span class="rank-block">{{question.status}}</span>
+	</div>
+	<div class="viewNum"><span>{{question.viewNum}}</span><span class="rank-block">ä¯ÀÀ</span></div>
 </div>
 <div class="summary">
 	<div class="author">
-		<span>{{question.date}}</span>æ¥è‡ª
-		<a class="custom-a-none" href="#/community/userInfo/{{question.author}}">{{question.author}}</a>
+		<span>{{question.askDate}}</span>À´×Ô
+		<a href="#/community/userInfo/{{question.userId}}">{{question.userId}}</a>
 	</div>
-	<h3 class="title">
-		<a class="custom-a-brown" href="#/community/question/{{question.id}}">{{question.title}}</a>
-	</h3>
-	<ul class="list-inline tag">
-		<li ng-repeat="tag in question.tags"><a href="" class="custom-a-none"><span class="label label-info">{{tag.label}}</span></a></li>
-	</ul>
+	<div class="content">
+		<div class="title">
+			<a class="custom-a-brown" href="#/community/question/{{question.id}}">{{question.title}}</a>
+		</div>
+		<ul class="list-inline tag-list">
+			<li ng-repeat="tag in question.tags">
+				<a href="#/community/index.html" class="custom-a-none tag" ng-click="tagClick(tag.label)">{{tag.label}}</a>
+			</li>
+		</ul>
+	</div>
 </div>

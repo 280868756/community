@@ -1,0 +1,19 @@
+<hy:view>
+<div class="warp">
+	<pub-nav></pub-nav>
+	<div class="container">
+		<form name="questionForm">
+			<h4>提问题</h4>
+			<input ng-model="question.title" class="title-input mb-10" type="text" placeholder="提问：一句话说清你在开发中遇到的问题"></input>
+
+			<!-- <expander></expander> -->
+			<question-tags></question-tags>
+			
+			<script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
+		</form>
+		<div class="mt-10 text-right">
+			<button id="publishQuestion" class="btn btn-primary" ng-click="publishQuestion()">发布问题</button>
+		</div>
+	</div>
+</div>
+</hy:view>

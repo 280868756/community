@@ -462,7 +462,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
   font-weight: 500;
   line-height: 1.1;
 }
@@ -3801,13 +3801,13 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .nav > li {
   position: relative;
-  display: block;
+  display: inline-block;
 }
 
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 10px 15px;
+  padding: 10px 10px;
 }
 
 .nav > li > a:hover,
@@ -4014,7 +4014,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   z-index: 1000;
-  min-height: 50px;
+  min-height: 40px;
   margin-bottom: 20px;
   border: 1px solid transparent;
 }
@@ -5742,6 +5742,7 @@ body.modal-open,
 }
 
 .tooltip {
+  width:200px;
   position: absolute;
   z-index: 1030;
   display: block;

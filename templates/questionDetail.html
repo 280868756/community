@@ -1,26 +1,26 @@
 <div class="wrap">
 	<div class="header">
+		<pub-nav></pub-nav>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-9">
 					<div>
-						<a href="#/community/">é—®ç­”</a>
-						<span>>é—®ç­”è¯¦æƒ…</span>
+						<a href="#/community/">ÎÊ´ğ</a>
+						<span>>ÎÊ´ğÏêÇé</span>
 					</div>
-					<h2 class="title">{{question.title}}</h2>
-					<div class="pt-10">
-						<a class="custom-a-none userName" href="#/community/userInfo/{{question.author}}">{{question.author}}</a>
-						<span>&nbsp;&nbsp;æé—®äº&nbsp;&nbsp;</span>
-						<span>{{question.date}}</span>
+					<h3 class="mt-10">{{question.title}}</h3>
+					<div>
+						<a class="custom-a-none userName" href="#/community/userInfo/{{question.userId}}">{{question.userId}}</a>
+						<span>&nbsp;&nbsp;ÌáÎÊÓÚ&nbsp;&nbsp;</span>
+						<span>{{question.askDate}}</span>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<ul class="list-unstyled">
-						<li>
-							<button class="btn btn-primary" ng-click="focus()">å…³ æ³¨</button><strong>&nbsp;&nbsp;{{question.focus}}&nbsp;</strong>å…³æ³¨
-						</li>
-						<li class="mt-10">
-							<button class="btn btn-success" ng-click="collect()">æ”¶ è—</button><strong>&nbsp;&nbsp;{{question.collect}}&nbsp;</strong>æ”¶è—ï¼Œ<strong>&nbsp;{{question.view}}&nbsp;</strong>æµè§ˆ
+						<li class="mt-15 text-right">
+							<button class="btn btn-warning disabled" ng-click="focus()">ä¯ ÀÀ <span class="">{{question.viewNum}}</span></button>
+							<button class="btn btn-primary" ng-class="{'disabled':!canCollect}" ng-click="collect()" ng-show="!showCancelCollected">ÊÕ ²Ø <span class="">{{question.collectNum}}</span></button>
+							<button class="btn btn-primary" ng-click="cancelCollected()" ng-show="showCancelCollected">È¡ÏûÊÕ²Ø <span class="">{{question.collectNum}}</span></button>
 						</li>
 					</ul>
 				</div>
@@ -31,36 +31,39 @@
 		<div class="row">
 			<div class="col-md-9">
 				<div class="question">
-					<div class="console-button">
-						<div class="vote-btn vote-btn-up" ng-click="addVote()"></div>
-						<div class="vote-count" ng-bind="question.votes"></div>
-						<div class="vote-btn vote-btn-down" ng-click="subVote()"></div>
+					<div class="sidebar console-button">
+						<div class="vote-btn vote-btn-up" ng-click="addVote()" data-toggle="tooltip" data-placement="top" title="ÎÊÌâ¶ÔÈËÓĞ°ïÖú£¬ÄÚÈİÍêÕû£¬ÎÒÒ²ÏëÖªµÀ´ğ°¸"></div>
+						<div class="vote-count" ng-bind="question.voteNum"></div>
+						<div class="vote-btn vote-btn-down" ng-click="subVote()" data-toggle="tooltip" data-placement="bottom" title="ÎÊÌâÃ»ÓĞÊµ¼Ê¼ÛÖµ£¬È±ÉÙ¹Ø¼üÄÚÈİ£¬Ã»ÓĞ¸Ä½øÓàµØ"></div>
 					</div>
 					<div class="content">
-						<p>{{question.content}}</p>
-						<div class="q-tags">
-							<ul class="list-inline tag">
+						<div id="questionContent" class="ml-60"></div>
+						<div class="q-tags ml-60">
+							<ul class="list-inline">
 								<li ng-repeat="tag in question.tags">
-									<a href="" class="custom-a-none"><span class="label label-info">{{tag.label}}</span></a>
+									<a href="#/community" class="custom-a-none" ng-click="tagClick(tag.label)"><span class="large-tag">{{tag.label}}</span></a>
 								</li>
 							</ul>
 						</div>
 					</div>
 				</div>
 				<div class="answers" ng-controller="AnswersController">
-					<div class="answers-Num">{{answers.length}}ä¸ªå›ç­”</div>
+					<div class="answers-Num">{{answers.length}}¸ö»Ø´ğ</div>
 					<div class="answer" ng-repeat="answer in answers" ng-modal="answer">
-						<answer-item></answer-item>
+						<answer-item answer="answer" after-set-accept="afterSetAccept()"></answer-item>
 					</div>
-					<h3>æ’°å†™ç­”æ¡ˆ</h3>
-					
+					<h3>×«Ğ´´ğ°¸</h3>
+					<script id="answerEditor" type="text/plain" style="width:100%;height:150px;"></script>
+					<div class="text-right  mt-15">
+						<button id="submitAnswer" class="btn btn-primary" ng-click="submitAnswer()">Ìá½»»Ø´ğ</button>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div>
 					<div class="first-widget-box">
 						<h4>
-							ç›¸ä¼¼é—®é¢˜
+							ÏàËÆÎÊÌâ
 						</h4>
 						<ul class="list-inline li-block">
 							<li class="tag-message" ng-repeat="question in similarQuestions"><a href="#/community/question/{{question.id}}">{{question.title}}</a></li>
