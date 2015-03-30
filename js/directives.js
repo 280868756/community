@@ -5,12 +5,21 @@ communityDirectives.directive('questionItem',
 		return {
 			restrict : 'EA',
 			scrope: {},
-			//replace : true,//Õâ¸öµØ·½ÉèÎªtrue¾Í±¨´í°¡...
+			//replace : true,//è¿™ä¸ªåœ°æ–¹è®¾ä¸ºtrueå°±æŠ¥é”™å•Š...
 			templateUrl: 'templates/question.html'
 		}
 	}
 );
-
+communityDirectives.directive('articleItem',
+	function(){
+		return {
+			restrict : 'EA',
+			scrope: {},
+			//replace : true,//è¿™ä¸ªåœ°æ–¹è®¾ä¸ºtrueå°±æŠ¥é”™å•Š...
+			templateUrl: 'templates/article.html'
+		}
+	}
+);
 communityDirectives.directive('answerItem',
 	function(){
 		return {
@@ -18,29 +27,29 @@ communityDirectives.directive('answerItem',
 			templateUrl : 'templates/answer.html',
 			scope : {
 				answer : "=",
-				afterSetAccept :¡¡"&"
+				afterSetAccept :ã€€"&"
 			},
-			controller :¡¡function($rootScope,$scope,QuestionService){
+			controller :ã€€function($rootScope,$scope,QuestionService){
 				$(".vote-btn").tooltip();
 				$rootScope.$watch('canSetQues',function(){
 					$scope.hasRight = $rootScope.canSetQues;
 				});
 				$scope.solved = $scope.answer.solveFlag == "1";
 				
-				//²ÉÄÉ´ğ°¸
+				//é‡‡çº³ç­”æ¡ˆ
 				$scope.acceptAnswer = function(){
 					$scope.solved = true;
-					//ÉèÖÃ¸ÃÎÊÌâ²ÉÄÉ
+					//è®¾ç½®è¯¥é—®é¢˜é‡‡çº³
 					QuestionService.acceptAnswer({
 						answerId : $scope.answer.id
 					},null,function(){
 						$scope.afterSetAccept();
 					});
 				}
-				//È¡Ïû²ÉÄÉ
+				//å–æ¶ˆé‡‡çº³
 				$scope.cancelAccept = function(){
 					$scope.solved = false;
-					//È¡Ïû¸ÃÎÊÌâ²ÉÄÉ
+					//å–æ¶ˆè¯¥é—®é¢˜é‡‡çº³
 					QuestionService.cancelAccept({
 						answerId : $scope.answer.id
 					},null,function(){
@@ -57,7 +66,7 @@ communityDirectives.directive('answerItem',
 					$scope.setVoteNum(voteNum,0);
 				}
 				$scope.setVoteNum = function(voteNum,flag){
-					//flag 1±íÊ¾¶¥£¬0±íÊ¾²È
+					//flag 1è¡¨ç¤ºé¡¶ï¼Œ0è¡¨ç¤ºè¸©
 					var userName = $rootScope.nav_userName;
 			
 					if(!userName){
@@ -73,9 +82,9 @@ communityDirectives.directive('answerItem',
 						},function(data){
 							console.log(data);
 							if(data.evalFlag == 0){
-								alert("¸Ã»Ø´ğÄúÒÑ¾­²È¹ı£¡");
+								alert("è¯¥å›ç­”æ‚¨å·²ç»è¸©è¿‡ï¼");
 							}else if(data.evalFlag == 1){
-								alert("¸Ã»Ø´ğÄúÒÑ¾­¶¥¹ı£¡");
+								alert("è¯¥å›ç­”æ‚¨å·²ç»é¡¶è¿‡ï¼");
 							}else{
 								$scope.answer.voteNum = voteNum;
 							}
@@ -134,7 +143,7 @@ communityDirectives.directive('expander',
 				}
 			},
 			template : '<div class="label-expander mb-10">'+
-							'<input class="title" ng-readonly="true" ng-model="question.tags" ng-click="expanderToggle()" placeholder="Ñ¡Ôñ±êÇ©"></input>'+
+							'<input class="title" ng-readonly="true" ng-model="question.tags" ng-click="expanderToggle()" placeholder="é€‰æ‹©æ ‡ç­¾"></input>'+
 							'<div class="body" ng-show="showMe"></div>'+
 					   '</div>',
 			link : function(scope,iElement,iAttrs,controller){
@@ -227,14 +236,14 @@ communityDirectives.directive('pagination',
 			link : function(scope,iElement,iAttrs,controller){
 				var promise = controller.getPageSize();
 				promise.success(function(data){
-					//ÉèÖÃµ±Ç°Ò³Âë
+					//è®¾ç½®å½“å‰é¡µç 
 					scope.currentPage = 1;
-					//Ò»¹²¶àÉÙÒ³
+					//ä¸€å…±å¤šå°‘é¡µ
 					scope.pageSize = data.allPageNum;
 					scope.pageNumArr = [];
 					for(var i = 0; i < scope.pageSize; i++){
 						scope.pageNumArr.push(i+1);
-						//ÕâÀïÏÈ²»¹ÜÁË£¬°Ñ·ÖÒ³ÏÈ È«¼ÓÔØ³öÀ´°É
+						//è¿™é‡Œå…ˆä¸ç®¡äº†ï¼ŒæŠŠåˆ†é¡µå…ˆ å…¨åŠ è½½å‡ºæ¥å§
 						/*if(i >= 4){
 							break;
 						}*/
@@ -242,18 +251,18 @@ communityDirectives.directive('pagination',
 				})
 				
 				
-				//ÉèÖÃ·ÖÒ³
+				//è®¾ç½®åˆ†é¡µ
 				scope.setPagination = function(currentPage){
 					scope.currentPage = currentPage;
 					
 					var i , showPageId, hidePageId;
 					
 					if(currentPage >= 4){
-						//Ö»±£Áôµ±Ç°Ò³µÄÇ°Ãæ2Ò³£¬
+						//åªä¿ç•™å½“å‰é¡µçš„å‰é¢2é¡µï¼Œ
 						var prevPage = currentPage-3;
 						var i;
 						
-						//×î´óÒş²ØÁ½¸ö
+						//æœ€å¤§éšè—ä¸¤ä¸ª
 						for(i = prevPage; i > prevPage-2; i--){
 							hidePageId = "page_"+i;
 							$("#"+scope.id+" #"+hidePageId).hide();
@@ -263,19 +272,19 @@ communityDirectives.directive('pagination',
 							$("#"+scope.id+" #"+showPageId).show();
 						}
 						
-						//Ö»±£Áôµ±Ç°Ò³µÄºóÃæ2Ò³
+						//åªä¿ç•™å½“å‰é¡µçš„åé¢2é¡µ
 						var nextPage = currentPage + 3;
 						for(i = currentPage + 1; i < nextPage; i++){
 							showPageId = "page_"+i;
 							$("#"+scope.id+" #"+showPageId).show();
 						}
-						//×î¶àÒ²¾ÍÒş²ØÁ½¸ö
+						//æœ€å¤šä¹Ÿå°±éšè—ä¸¤ä¸ª
 						for(i = nextPage; i < nextPage+2; i++){
 							hidePageId = "page_"+i;
 							$("#"+scope.id+" #"+hidePageId).hide();
 						}
 					}else{
-						//Èç¹ûµ±Ç°Ò³Ğ¡ÓÚ4£¬ÄÇÃ´¾ÍÏÔÊ¾Ç°5Ò³
+						//å¦‚æœå½“å‰é¡µå°äº4ï¼Œé‚£ä¹ˆå°±æ˜¾ç¤ºå‰5é¡µ
 						for(i = 0; i < 5; i++){
 							var showPageId = "page_"+(i+1);
 							$("#"+scope.id+" #"+showPageId).show();
@@ -285,11 +294,11 @@ communityDirectives.directive('pagination',
 							$("#"+scope.id+" #"+hidePageId).hide();
 						}
 					}
-					//»ñÈ¡·ÖÒ³ĞÅÏ¢
+					//è·å–åˆ†é¡µä¿¡æ¯
 					scope.getPageInfo();
 				}
 				
-				//»ñÈ¡Ç°Ò»Ò³µÄ·ÖÒ³ĞÅÏ¢
+				//è·å–å‰ä¸€é¡µçš„åˆ†é¡µä¿¡æ¯
 				scope.getPrevPage = function(){
 					if(scope.currentPage == 1){
 						return;
@@ -297,7 +306,7 @@ communityDirectives.directive('pagination',
 					scope.setPagination(scope.currentPage-1);
 				}
 				
-				//»ñÈ¡ºóÒ»Ò³µÄ·ÖÒ³ĞÅÏ¢
+				//è·å–åä¸€é¡µçš„åˆ†é¡µä¿¡æ¯
 				scope.getNextPage = function(){
 					if(scope.currentPage == scope.pageSize){
 						return;
@@ -320,7 +329,7 @@ communityDirectives.directive('answerContent',
 			replace : true,
 			transclude : true,
 			template : '<div></div>',
-			scope :¡¡{
+			scope :ã€€{
 				content : "="
 			},
 			link : function(scope,iElement,iAttrs){
@@ -373,7 +382,7 @@ communityDirectives.directive('questionTags',
 							'<ul class="list-inline	question-tags">'+
 								'<li>'+
 									'<div class="">'+
-										'<input type="text" class="question-tag-input" placeholder="±êÇ©£¬Èç£ºjava" ng-keyup="inputKeyup()" ng-keydown="inputKeydown()"></input>'+
+										'<input type="text" class="question-tag-input" placeholder="æ ‡ç­¾ï¼Œå¦‚ï¼šjava" ng-keyup="inputKeyup()" ng-keydown="inputKeydown()"></input>'+
 									'</div>'+
 									'<ul class="tags-layer"></ul>'+
 								'</li>'+
@@ -387,7 +396,7 @@ communityDirectives.directive('questionTags',
 					promise = controller.getLabels(),
 					newInputTemp = '<li>'+
 										'<div class="">'+
-											'<input type="text" class="question-tag-input" placeholder="±êÇ©£¬Èç£ºjava" ng-focus></input>'+
+											'<input type="text" class="question-tag-input" placeholder="æ ‡ç­¾ï¼Œå¦‚ï¼šjava" ng-focus></input>'+
 										'</div>'+
 										'<ul class="tags-layer"></ul>'+
 									'</li>';
@@ -414,7 +423,7 @@ communityDirectives.directive('questionTags',
 						layerHtml = "";
 
 					if(event.keyCode == 38){
-						//ÏòÉÏ·½Ïò¼ü
+						//å‘ä¸Šæ–¹å‘é”®
 						var showTags = $(currentTagLayer).children();
 						if(showTags.length > 0){
 							var Tagslenght =  showTags.length;
@@ -422,10 +431,10 @@ communityDirectives.directive('questionTags',
 								if($(showTags[j]).hasClass('active')){
 									$(showTags[j]).removeClass('active');
 									if(j == 0){
-										//µ±Ç°ÊÇµÚÒ»¸ötag£¬ÄÇÃ´°ÑµÚ×îºóÒ»¸ötagÑùÊ½ÉèÎªactive
+										//å½“å‰æ˜¯ç¬¬ä¸€ä¸ªtagï¼Œé‚£ä¹ˆæŠŠç¬¬æœ€åä¸€ä¸ªtagæ ·å¼è®¾ä¸ºactive
 										$(showTags[Tagslenght - 1]).addClass('active');
 									}else{
-										//ÉÏÃæÒ»¸ötagÑùÊ½±äÎªactive
+										//ä¸Šé¢ä¸€ä¸ªtagæ ·å¼å˜ä¸ºactive
 										$(showTags[j-1]).addClass('active');
 									}
 									break;
@@ -433,7 +442,7 @@ communityDirectives.directive('questionTags',
 							}
 						}
 					}else if(event.keyCode == 40){
-						//ÏòÏÂ·½Ïò¼ü
+						//å‘ä¸‹æ–¹å‘é”®
 						var showTags = $(currentTagLayer).children();
 						if(showTags.length > 0){
 							var Tagslenght =  showTags.length;
@@ -441,10 +450,10 @@ communityDirectives.directive('questionTags',
 								if($(showTags[j]).hasClass('active')){
 									$(showTags[j]).removeClass('active');
 									if(j == Tagslenght - 1){
-										//µ±Ç°ÊÇ×îºóÒ»¸ötag£¬ÄÇÃ´°ÑµÚÒ»¸ötagÑùÊ½ÉèÎªactive
+										//å½“å‰æ˜¯æœ€åä¸€ä¸ªtagï¼Œé‚£ä¹ˆæŠŠç¬¬ä¸€ä¸ªtagæ ·å¼è®¾ä¸ºactive
 										$(showTags[0]).addClass('active');
 									}else{
-										//ÏÂÃæÒ»¸ötagÑùÊ½±äÎªactive
+										//ä¸‹é¢ä¸€ä¸ªtagæ ·å¼å˜ä¸ºactive
 										$(showTags[j+1]).addClass('active');
 									}
 									break;
@@ -452,7 +461,7 @@ communityDirectives.directive('questionTags',
 							}
 						}
 					}else if(event.keyCode == 13){
-						//»Ø³µ¼ü
+						//å›è½¦é”®
 						if($(currentTagLayer).css("display")=="block"){
 							console.log("enter----block");
 							var showTags = $(currentTagLayer).children();
@@ -469,7 +478,7 @@ communityDirectives.directive('questionTags',
 						}
 					}else{
 						if(event.keyCode == 8 && searchText==""){
-							//É¾³ı¼ü£¬Èç¹ûÊäÈë¿òÖĞÃ»ÓĞÄÚÈİÉèÖÃlayerÒş²Ø
+							//åˆ é™¤é”®ï¼Œå¦‚æœè¾“å…¥æ¡†ä¸­æ²¡æœ‰å†…å®¹è®¾ç½®layeréšè—
 							$(currentTagLayer).css("display","none");
 						}else{
 							console.log("allTags.length:"+allTags.length);
@@ -516,7 +525,7 @@ communityDirectives.directive('questionTags',
 				var inputKeydown = function(){
 					var event = event? event:window.event;
 					if(event.keyCode == 9){
-						//TAB¼ü
+						//TABé”®
 						var tagList = iElement.children().eq(0).children().last().children();
 						var currentTagInput = $(tagList[0]).children().eq(0),
 							currentTagLayer = tagList[1];
@@ -528,19 +537,19 @@ communityDirectives.directive('questionTags',
 				var setTag = function(tag,flag){
 					console.log("==========="+tag);
 					if(flag == "add"){
-						//½«Òş²ØÓòÀïµÄÖµÉ¾³ı
+						//å°†éšè—åŸŸé‡Œçš„å€¼åˆ é™¤
 						var labelArr = scope.question.tags.split(tag);
 						var text = "";
 						for(var i = 0; i < labelArr.length; i++){
 							text = text + labelArr[i];
 						}
 						scope.question.tags = text;
-						//allTagsÊı×éÖĞÌí¼Ó¸Ãtag
+						//allTagsæ•°ç»„ä¸­æ·»åŠ è¯¥tag
 						allTags.unshift(tag);
 					}else if(flag == "delete"){
-						//½«Òş²ØÓòÖµÌí¼Ó¸Ãtag
+						//å°†éšè—åŸŸå€¼æ·»åŠ è¯¥tag
 						scope.question.tags += tag + "  ";
-						//allTagsÊı×éÖĞÉ¾³ı¸Ãtag
+						//allTagsæ•°ç»„ä¸­åˆ é™¤è¯¥tag
 						for(var i = 0; i < allTags.length; i++){
 							if(allTags[i] == tag){
 								allTags.splice(i,1);
@@ -550,21 +559,21 @@ communityDirectives.directive('questionTags',
 				}
 				
 				var setInputValue = function(currentTagInput,currentTagLayer,value){
-					//ÉèÖÃinputµÄÖµ£¬²¢½«¸ÃinputÉèÎªÖ»¶ÁÇÒÔö¼ÓÒ»¸ö¹Ø±Õ°´Å¥£¬²úÉúÒ»¸öĞÂµÄinput
+					//è®¾ç½®inputçš„å€¼ï¼Œå¹¶å°†è¯¥inputè®¾ä¸ºåªè¯»ä¸”å¢åŠ ä¸€ä¸ªå…³é—­æŒ‰é’®ï¼Œäº§ç”Ÿä¸€ä¸ªæ–°çš„input
 					$(currentTagInput).val(value);
 					$(currentTagLayer).css("display","none");
-					//´ÓÊı×éÖĞÉ¾³ı¸ÃÔªËØ£¬·ÀÖ¹ÖØ¸´Ñ¡ÖĞ
+					//ä»æ•°ç»„ä¸­åˆ é™¤è¯¥å…ƒç´ ï¼Œé˜²æ­¢é‡å¤é€‰ä¸­
 					setTag(value,"delete");
 					
-					//ÉèÖ»¶Á
+					//è®¾åªè¯»
 					$(currentTagInput).attr("disabled","disabled");
 					
-					//Ôö¼Ó¹Ø±Õ°´Å¥
-					$(currentTagInput).parent().append('<a href="javascript:void(0);" class="tag-close">¡Á</a>');
+					//å¢åŠ å…³é—­æŒ‰é’®
+					$(currentTagInput).parent().append('<div href="javascript:void(0);" class="tag-close">Ã—</div>');
 					var closeButton = $(currentTagInput).parent().children().last();
 					
 					$(closeButton).bind("click",function(){
-						//É¾³ıÕû¸öinput
+						//åˆ é™¤æ•´ä¸ªinput
 						setTag($($(this).prev()).val(),"add");
 						if($(iElement.children().eq(0).children().last().children().eq(0).children().eq(0)).attr("disabled") == "disabled"){
 							$(this).parent().parent().remove();
@@ -575,17 +584,17 @@ communityDirectives.directive('questionTags',
 						
 					});
 					
-					//Ò»¸öÎÊÌâ×î¶à¹ØÁª4¸ötag
+					//ä¸€ä¸ªé—®é¢˜æœ€å¤šå…³è”4ä¸ªtag
 					if(iElement.children().eq(0).children().length < 4){
 						addTagInput();
 					}					
 				}
 				
 				var addTagInput = function(){
-					//²úÉúÒ»¸öĞÂµÄinput
+					//äº§ç”Ÿä¸€ä¸ªæ–°çš„input
 					$(iElement.children().eq(0)).append(newInputTemp);
 					
-					//°ó¶¨ÊÂ¼ş
+					//ç»‘å®šäº‹ä»¶
 					var newInput = iElement.children().eq(0).children().last().children().eq(0).children().eq(0);
 					
 					$(newInput).bind("keyup",function(){
@@ -594,7 +603,7 @@ communityDirectives.directive('questionTags',
 						inputKeydown();
 					});
 					
-					//ĞÂÔö¼ÓµÄinput»ñÈ¡½¹µã
+					//æ–°å¢åŠ çš„inputè·å–ç„¦ç‚¹
 					setTimeout(function(){
 						$(newInput).focus();
 					},0)

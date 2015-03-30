@@ -28,14 +28,24 @@ communityServices.factory('QuestionsService',['$resource',
 					params:{action: 'getUnSolvedQuestions'},
 					isArray:true
 				},
+				getAnsweredQuestions : {
+					method:"GET",
+					params:{action: 'getAnsweredQues'},
+					isArray:true
+				},
+				getArticles : {
+					method:"GET",
+					params:{action: 'getAllShares'},
+					isArray:true
+				},
 				getUserCreatedQuestions : {
 					method:"GET",
 					params:{action: 'getUserCreatedQuestions'},
 					isArray:true
 				},
-				getUserCollectedQuestions : {
+				getUserCollects : {
 					method:"GET",
-					params:{action: 'getUserCollectedQuestions'},
+					params:{action: 'getUserCollects'},
 					isArray:true
 				},
 				getHotQuestions : {
@@ -78,7 +88,7 @@ communityServices.factory('UserInfoService',['$resource',
 					isArray:true
 				},saveUserInfo : {
 					method:"POST",
-  					params:{action: 'saveImg'},
+  					params:{action: 'saveInfo'},
   					headers:{
 						'X-Requested-With':'XMLHttpRequest',
 						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -86,7 +96,7 @@ communityServices.factory('UserInfoService',['$resource',
 					transformRequest: function(obj) {  
 						var str = [];  
 						for(var p in obj){  
-							str.push("userImgMap."+encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));  
+							str.push("userInfoMap."+encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));  
 						}  
 						return str.join("&");  
 					}
@@ -209,6 +219,75 @@ communityServices.factory('QuestionService',['$resource',
   		);
   	}]);
 
+communityServices.factory('ArticleService',['$resource',
+	function($resource){
+  		return $resource(
+  			'/UEP-PUB/community/communityAction.do',
+  			{shareId : "@articleId"},
+  			{
+				getArticleDetail : {
+    				method:"GET",
+					params:{action: 'getShareDetail'},
+					isArray:false
+    			}
+    			,getComments : {
+    				method:"GET",
+					params:{action: 'getShareComments'},
+					isArray:true
+    			}
+    			,saveComment : {
+  					method:"POST",
+					params:{action: 'saveComment'},
+					headers:{
+						'X-Requested-With':'XMLHttpRequest',
+						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+					},
+					transformRequest: function(obj) {  
+						var str = [];  
+						for(var p in obj){  
+							str.push("commentMap."+encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));  
+						}  
+						return str.join("&");  
+					}
+  				}
+  				,saveArticleIndex : {
+					method:"POST",
+					params:{action: 'saveShareIndex'},
+					headers:{
+						'X-Requested-With':'XMLHttpRequest',
+						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+					},
+					transformRequest: function(obj) {  
+						var str = [];  
+						for(var p in obj){  
+							str.push("shareIndexMap."+encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));  
+						}  
+						return str.join("&");  
+					}
+				}
+				,cancelCollected : {
+					method:"POST",
+					params:{action: 'cancleShareCollected',shareId:'@shareId'},
+					headers:{
+						'X-Requested-With':'XMLHttpRequest',
+						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+					}
+				}
+				,hasCollected : {
+					method:"GET",
+					params:{action: 'hasCollected'},
+					isArray:false
+				}
+				,hasVoted : {
+					method:"GET",
+					params:{action: 'getShareEval'},
+					isArray:false
+				}
+  			}
+  		);
+	}
+])
+
 
 communityServices.factory('CommentsService',['$resource', 
   	function($resource){
@@ -248,24 +327,45 @@ communityServices.factory('askService',['$resource', '$http',
     return {
     	saveQuestion : function(question){
     		return $http({
-						method:"POST",
-						url:"/UEP-PUB/community/communityAction.do",
-						params:{
-							action:"saveQuestion"
-						},
-						data:question,
-						headers:{
-							'X-Requested-With':'XMLHttpRequest',
-							'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-						},
-						transformRequest: function(obj) {  
-							var str = [];  
-							for(var p in obj){  
-								str.push("questionMap."+encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));  
-							}  
-							return str.join("&");  
-						}
-					});
+				method:"POST",
+				url:"/UEP-PUB/community/communityAction.do",
+				params:{
+					action:"saveQuestion"
+				},
+				data:question,
+				headers:{
+					'X-Requested-With':'XMLHttpRequest',
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+				},
+				transformRequest: function(obj) {  
+					var str = [];  
+					for(var p in obj){  
+						str.push("questionMap."+encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));  
+					}  
+					return str.join("&");  
+				}
+			});
+    	},
+    	saveArticle : function(question){
+    		return $http({
+				method:"POST",
+				url:"/UEP-PUB/community/communityAction.do",
+				params:{
+					action:"saveNewShare"
+				},
+				data:question,
+				headers:{
+					'X-Requested-With':'XMLHttpRequest',
+					'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+				},
+				transformRequest: function(obj) {  
+					var str = [];  
+					for(var p in obj){  
+						str.push("questionMap."+encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));  
+					}  
+					return str.join("&");  
+				}
+			});
     	}
     };
   }]);

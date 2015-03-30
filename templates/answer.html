@@ -1,42 +1,42 @@
 <div class="sidebar">
 	<div class="console-button">
-		<div class="vote-btn vote-btn-up" ng-click="addVote(answer)" data-toggle="tooltip" data-placement="top" title="´ğ°¸¶ÔÈËÓĞ°ïÖú£¬ÓĞ²Î¿¼¼ÛÖµ"></div>
+		<div class="vote-btn vote-btn-up" ng-click="addVote(answer)" data-toggle="tooltip" data-placement="top" title="ç­”æ¡ˆå¯¹äººæœ‰å¸®åŠ©ï¼Œæœ‰å‚è€ƒä»·å€¼"></div>
 		<div class="vote-count" ng-bind="answer.voteNum"></div>
-		<div class="vote-btn vote-btn-down" ng-click="subVote(answer)" data-toggle="tooltip" data-placement="bottom" title="´ğ°¸Ã»°ïÖú£¬ÊÇ´íÎóµÄ´ğ°¸£¬´ğ·ÇËùÎÊ"></div>
+		<div class="vote-btn vote-btn-down" ng-click="subVote(answer)" data-toggle="tooltip" data-placement="bottom" title="ç­”æ¡ˆæ²¡å¸®åŠ©ï¼Œæ˜¯é”™è¯¯çš„ç­”æ¡ˆï¼Œç­”éæ‰€é—®"></div>
 	</div>
-	<div class="accepted-flag" ng-show="solved">²ÉÄÉ</div>
+	<div class="accepted-flag" ng-show="solved">é‡‡çº³</div>
 </div>
 <div class="ml-60">
 	<div class="ahthor">
 		<a class="custom-a-none userName" href="#/community/userInfo/{{answer.userId}}">{{answer.userId}}</a>
-		<span>&nbsp;&nbsp;{{answer.answerDate}}&nbsp;&nbsp;</span>»Ø´ğ
+		<span>&nbsp;&nbsp;{{answer.answerDate}}&nbsp;&nbsp;</span>å›ç­”
 	</div>
 	<div class="answer-content">
 		<answer-content content='answer.content'></answer-content>
 	</div>
 	<div ng-controller="CommentsController">
-		<button class="btn btn-success font-smaller" ng-show="!solved && hasRight" ng-click="acceptAnswer()">¡Ì²ÉÄÉ¸Ã´ğ°¸</button>
-		<button class="btn btn-info font-smaller" ng-show="solved && hasRight" ng-click="cancelAccept()">È¡Ïû²ÉÄÉ</button>
-		<a href="javascript:void(0)" ng-click="checkComment()" class="comment-btn">{{comments.length}} ÆÀÂÛ</a>
+		<button class="btn btn-success font-smaller" ng-show="!solved && hasRight" ng-click="acceptAnswer()">âˆšé‡‡çº³è¯¥ç­”æ¡ˆ</button>
+		<button class="btn btn-info font-smaller" ng-show="solved && hasRight" ng-click="cancelAccept()">å–æ¶ˆé‡‡çº³</button>
+		<a href="javascript:void(0)" ng-click="checkComment()" class="comment-btn">{{comments.length}} è¯„è®º</a>
 		<div ng-show="showComments" class="comment">
 			<div ng-repeat="comment in comments">
-				<small>»Ø¸´:</small><a ng-href="#/community/userInfo/{{comment.commentedUser}}" class="custom-a-none comment-userName">{{comment.commentedUser}}</a>
+				<small>å›å¤:</small><a ng-href="#/community/userInfo/{{comment.commentedUser}}" class="custom-a-none comment-userName">{{comment.commentedUser}}</a>
 				<p ng-bind="comment.content"></p>
 				<span>{{$index + 1 | floorFilter}}</span>
 				<a ng-href="#/community/userInfo/{{comment.userId}}" class="custom-a-none comment-userName">{{comment.userId}}</a>
 				<span>{{comment.commentDate | date:"yyyy-mm-dd" | commentDateFilter}}</span>
-				<small class="reply" ng-click="replyClick(comment)">»Ø¸´</small>
+				<small class="reply" ng-click="replyClick(comment)">å›å¤</small>
 				<div class="comment-line"></div>
 			</div>
 			<div ng-show="showReply">
-				<small>»Ø¸´:<span class="userName">{{newComment.commentedUser}}</span><span class="closeIcon" ng-click="deleteUser()"> [¡Á]</span></small>
+				<small>å›å¤:<span class="userName">{{newComment.commentedUser}}</span><span class="closeIcon" ng-click="deleteUser()"> [Ã—]</span></small>
 			</div>
 			<div class="row">
 				<div class="col-md-10">
 					<textarea class="comment-input" ng-model="newComment.content"></textarea>
 				</div>
 				<div class="col-md-2">
-					<button id="submitComment" class="btn btn-primary" ng-click="submitComment()">Ìá½»ÆÀÂÛ</button>
+					<button id="submitComment" class="btn btn-primary" ng-click="submitComment()">æäº¤è¯„è®º</button>
 				</div>
 			</div>
 		</div>

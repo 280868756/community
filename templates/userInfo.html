@@ -10,12 +10,16 @@
 				</div>
 				<div class="col-md-7">
 					<h3>{{userInfo.userId}}</h3>
-					<!-- <h4>²¿ÃÅ£º{{userInfo.department}}</h4> -->
+					<h4>å£°æœ›å€¼ï¼š<strong>{{userInfo.popularity}}</strong></h4>
+					<h4>ä¸ªäººç­¾åï¼š<span ng-show="!canEditSignature">{{userInfo.signature}}</span>
+						<input id="signatureInput" ng-blur="signatureInputBlur()" ng-show="canEditSignature" ng-model='userInfo.signature'></input>
+					</h4>
 				</div>
 				<div class="col-md-3 pt-30">
-					<button class="btn btn-success" ng-show="showFocus && canFocus" ng-click="setFocus()">+¼Ó¹Ø×¢</button>
-					<button class="btn btn-success" ng-show="showFocus && !canFocus" ng-click="cancelFocus()">È¡Ïû¹Ø×¢</button>
-					<button class="btn btn-primary" ng-show="userInfo.userId == nav_userName" ng-click="uploadImg()">ÉÏ´«Í¼Æ¬</button>
+					<button class="btn btn-success" ng-show="showFocus && canFocus" ng-click="setFocus()">+åŠ å…³æ³¨</button>
+					<button class="btn btn-success" ng-show="showFocus && !canFocus" ng-click="cancelFocus()">å–æ¶ˆå…³æ³¨</button>
+					<button class="btn btn-primary" ng-show="userInfo.userId == nav_userName" ng-click="uploadImg()">ä¸Šä¼ å›¾ç‰‡</button>
+					<button class="btn btn-success" ng-show="userInfo.userId == nav_userName" ng-click="editSignature()">ç¼–è¾‘ç­¾å</button>
 				</div>
 			</div>
 		</div>
@@ -24,28 +28,42 @@
 		<div class="row">
 			<div class="col-md-9" ng-controller="UserQuestionsController">
 				<div class="btn-group cus-tab-title">
-				 	<div class="btn" ng-class="{'btn-warning':activedTabId==askTabId,'btn-success':activedTabId!=askTabId}" type="button" ng-click="tabClick(askTabId)">ÌáÎÊ</div>
-				 	<div class="btn" ng-class="{'btn-warning':activedTabId==collectTabId,'btn-success':activedTabId!=collectTabId}" type="button" ng-click="tabClick(collectTabId)">ÊÕ²Ø</div>
+				 	<div class="btn" ng-class="{'btn-warning':activedTabId==askTabId,'btn-success':activedTabId!=askTabId}" type="button" ng-click="tabClick(askTabId)">æé—®</div>
+				 	<div class="btn" ng-class="{'btn-warning':activedTabId==answerTabId,'btn-success':activedTabId!=answerTabId}" type="button" ng-click="tabClick(answerTabId)">å›ç­”</div>
+				 	<div class="btn" ng-class="{'btn-warning':activedTabId==articleTabId,'btn-success':activedTabId!=articleTabId}" type="button" ng-click="tabClick(articleTabId)">åˆ†äº«</div>
+				 	<div class="btn" ng-class="{'btn-warning':activedTabId==collectTabId,'btn-success':activedTabId!=collectTabId}" type="button" ng-click="tabClick(collectTabId)">æ”¶è—</div>
 				</div>
-				<hr>
+				<hr class="mb-0">
 				<div ng-show="activedTabId==askTabId">
 					<div class="question-list-item" ng-repeat="question in createdQuestions">
 						<question-item></question-item>
 					</div>
 					<!-- <pagination id="1" get-page-size-action="getAskQuesPageInfo" change-page="changePage(askTabId,curPageNum)"></pagination> -->
 				</div>
-				<div ng-show="activedTabId==collectTabId">
-					<div class="question-list-item" ng-repeat="question in collectedQuestions">
+				<div ng-show="activedTabId==answerTabId">
+					<div class="question-list-item" ng-repeat="question in answers">
 						<question-item></question-item>
+					</div>
+					<!-- <pagination id="1" get-page-size-action="getAskQuesPageInfo" change-page="changePage(askTabId,curPageNum)"></pagination> -->
+				</div>
+				<div ng-show="activedTabId==articleTabId">
+					<div class="question-list-item" ng-repeat="article in articles">
+						<article-item></article-item>
+					</div>
+					<!-- <pagination id="1" get-page-size-action="getAskQuesPageInfo" change-page="changePage(askTabId,curPageNum)"></pagination> -->
+				</div>
+				<div ng-show="activedTabId==collectTabId">
+					<div class="question-list-item" ng-repeat="article in collects">
+						<article-item></article-item>
 					</div>
 					<!-- <pagination id="2" get-page-size-action="getCollectedQuesPageInfo" change-page="changePage(collectTabId,curPageNum)"></pagination> -->
 				</div>
 			</div>
 			<div class="col-md-3">
-				<h3>TaµÄ¹ØÏµ</h3>
+				<h3>Taçš„å…³ç³»</h3>
 				<hr>
 				<div>
-					<p>¹Ø×¢:<span class="person-num">{{focuses.length}}</span>ÈË</p>
+					<p>å…³æ³¨:<span class="person-num">{{focuses.length}}</span>äºº</p>
 					<ul class="list-inline">
 						<li class="mb-10" ng-repeat="focus in focuses">
 							<a href="#/community/userInfo/{{focus.userId}}">
@@ -57,7 +75,7 @@
 				</div>
 				<hr>
 				<div>
-					<p>·ÛË¿:<span class="person-num">{{fans.length}}</span>ÈË</p>
+					<p>ç²‰ä¸:<span class="person-num">{{fans.length}}</span>äºº</p>
 					<ul class="list-inline">
 						<li class="mb-10" ng-repeat="fan in fans">
 							<a href="#/community/userInfo/{{fan.userId}}">

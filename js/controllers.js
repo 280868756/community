@@ -2,19 +2,21 @@ var communityControllers = angular.module('communityControllers', []);
 
 communityControllers.controller('QuestionsController', ['$rootScope' ,'$scope', '$http', '$location', 'QuestionsService','searchParam',
 	function($rootScope, $scope, $http, $location, QuestionsService,searchParam) {
-		//ËÑË÷ĞÅÏ¢
+		//æœç´¢ä¿¡æ¯
 		$scope.searchInfo = searchParam.searchInfo;
 		$scope.searchTag = searchParam.searchTag;
-		//µ±Ç°TabÒ³
+		//å½“å‰Tabé¡µ
 		$scope.activedTabId = 1;
 		
 		$scope.newTabId = 1;
 		$scope.hotTabId = 2;
 		$scope.unsolvedTabId = 3;
+		$scope.articleTabId = 4;
+		$scope.showDiff = false;//å¦‚æœä¸ºfalseï¼Œä¸æ˜¾ç¤ºé—®é¢˜å’Œæ–‡ç« çš„åŒºåˆ« 
 		
 		$scope.newQuestions = QuestionsService.getNewQuestions({curPageNum:1,searchInfo:searchParam.searchInfo,searchTag:searchParam.searchTag},function(data){
 			for (var i = 0; i < $scope.newQuestions.length; i++) {
-				$scope.newQuestions[i].status = $scope.newQuestions[i].solveFlag ? "½â¾ö" : "»Ø´ğ";
+				$scope.newQuestions[i].status = $scope.newQuestions[i].solveFlag ? "è§£å†³" : "å›ç­”";
 				$scope.newQuestions[i].status_class = $scope.newQuestions[i].solveFlag ? "q-solved" : ($scope.newQuestions[i].answerNum > 0 ? "q-hasanswers" : "q-noanswers");
 				$scope.newQuestions[i].tags = eval($scope.newQuestions[i].tags);
 			}
@@ -29,7 +31,7 @@ communityControllers.controller('QuestionsController', ['$rootScope' ,'$scope', 
 			if(tabId == 1){
 				$scope.newQuestions = QuestionsService.getNewQuestions({curPageNum:curPageNum,searchInfo:searchParam.searchInfo,searchTag:searchParam.searchTag},function(data){
 					for (var i = 0; i < $scope.newQuestions.length; i++) {
-						$scope.newQuestions[i].status = $scope.newQuestions[i].solveFlag ? "½â¾ö" : "»Ø´ğ";
+						$scope.newQuestions[i].status = $scope.newQuestions[i].solveFlag ? "è§£å†³" : "å›ç­”";
 						$scope.newQuestions[i].status_class = $scope.newQuestions[i].solveFlag ? "q-solved" : ($scope.newQuestions[i].answerNum > 0 ? "q-hasanswers" : "q-noanswers");
 						$scope.newQuestions[i].tags = eval($scope.newQuestions[i].tags);
 					}
@@ -37,7 +39,7 @@ communityControllers.controller('QuestionsController', ['$rootScope' ,'$scope', 
 			}else if(tabId == 2){
 				$scope.collectedQuestions = QuestionsService.getCollectedQuestions({curPageNum:curPageNum,searchInfo:searchParam.searchInfo,searchTag:searchParam.searchTag},function(data){
 					for (var i = 0; i < $scope.collectedQuestions.length; i++) {
-						$scope.collectedQuestions[i].status = $scope.collectedQuestions[i].solveFlag ? "½â¾ö" : "»Ø´ğ";
+						$scope.collectedQuestions[i].status = $scope.collectedQuestions[i].solveFlag ? "è§£å†³" : "å›ç­”";
 						$scope.collectedQuestions[i].status_class = $scope.collectedQuestions[i].solveFlag ? "q-solved" : ($scope.collectedQuestions[i].answerNum > 0 ? "q-hasanswers" : "q-noanswers");
 						$scope.collectedQuestions[i].tags = eval($scope.collectedQuestions[i].tags);
 					}
@@ -45,9 +47,16 @@ communityControllers.controller('QuestionsController', ['$rootScope' ,'$scope', 
 			}else if(tabId == 3){
 				$scope.unsolvedQuestions = QuestionsService.getUnsolvedQuestions({curPageNum:curPageNum,searchInfo:searchParam.searchInfo,searchTag:searchParam.searchTag},function(data){
 					for (var i = 0; i < $scope.unsolvedQuestions.length; i++) {
-						$scope.unsolvedQuestions[i].status = "»Ø´ğ";
+						$scope.unsolvedQuestions[i].status = "å›ç­”";
 						$scope.unsolvedQuestions[i].status_class = $scope.unsolvedQuestions[i].solveFlag ? "q-solved" : ($scope.unsolvedQuestions[i].answerNum > 0 ? "q-hasanswers" : "q-noanswers");
 						$scope.unsolvedQuestions[i].tags = eval($scope.unsolvedQuestions[i].tags);
+					}
+				});
+			}else if(tabId == 4){
+				$scope.articles = QuestionsService.getArticles({curPageNum:curPageNum,searchInfo:searchParam.searchInfo,searchTag:searchParam.searchTag},function(data){
+					for (var i = 0; i < $scope.articles.length; i++) {
+						$scope.articles[i].status_class = $scope.articles[i].voteNum > 0 ? "a-hasvotes" : "a-novotes";
+						$scope.articles[i].tags = eval($scope.articles[i].tags);
 					}
 				});
 			}
@@ -55,19 +64,19 @@ communityControllers.controller('QuestionsController', ['$rootScope' ,'$scope', 
 		
 		$scope.searchQuestions = function(){
 			angular.extend(searchParam, {searchInfo:$scope.searchInfo});
-			//ÉèÖÃÒ³ÃæÌø×ª£¬ÖØĞÂ¼ÓÔØÒ³Ãæ
+			//è®¾ç½®é¡µé¢è·³è½¬ï¼Œé‡æ–°åŠ è½½é¡µé¢
 			var path = $location.path()+"index.html";
 			$location.path(path).replace();
 		}
 		
-		//ÓÒ±ß±êÇ©ºÍÈÈÒéÎÊÌâ
-		$scope.showTitle = "ÈÈÒé±êÇ©";
+		//å³è¾¹æ ‡ç­¾å’Œçƒ­è®®é—®é¢˜
+		$scope.showTitle = "çƒ­è®®æ ‡ç­¾";
 		$scope.expendFlag = true;
 		$scope.hotQuestions = QuestionsService.getHotQuestions();
 		$scope.hotTags = QuestionsService.getHotTags();
 		$scope.getAllTags = function(){
 			$scope.hotTags = QuestionsService.getAllTags({},function(data){
-				$scope.showTitle = "È«²¿±êÇ©";
+				$scope.showTitle = "å…¨éƒ¨æ ‡ç­¾";
 				$scope.expendFlag = false;
 			});
 		}
@@ -86,10 +95,10 @@ communityControllers.controller('QuestionController', ['$rootScope', '$scope', '
 		}, function(question) {
 			$scope.question = question;
 			$scope.question.tags = eval(question.tags);
-			//²åÈëÄÚÈİ
+			//æ’å…¥å†…å®¹
 			$("#questionContent").append(question.content);
 			
-			//ä¯ÀÀÁ¿¼Ó1
+			//æµè§ˆé‡åŠ 1
 			$scope.question.viewNum += 1;
 			$scope.addView();
 			if($rootScope.nav_userName){
@@ -121,7 +130,7 @@ communityControllers.controller('QuestionController', ['$rootScope', '$scope', '
 				}
 			);
 		}
-		//ÊÕ²Ø
+		//æ”¶è—
 		$scope.collect = function() {
 			$scope.question.collectNum += 1;
 			QuestionService.saveQuestionIndex({
@@ -134,7 +143,7 @@ communityControllers.controller('QuestionController', ['$rootScope', '$scope', '
 				$rootScope.showCancelCollected = true;
 			});
 		}
-		//È¡ÏûÊÕ²Ø
+		//å–æ¶ˆæ”¶è—
 		$scope.cancelCollected = function(){
 			$scope.question.collectNum -= 1;
 			
@@ -156,7 +165,7 @@ communityControllers.controller('QuestionController', ['$rootScope', '$scope', '
 			if(!userName){
 				$('#loginModal').modal('show');
 			}else{
-				//flag 1±íÊ¾¶¥£¬0±íÊ¾²È
+				//flag 1è¡¨ç¤ºé¡¶ï¼Œ0è¡¨ç¤ºè¸©
 				QuestionService.saveQuestionIndex({
 					questionId: $routeParams.questionId,
 					userId: $rootScope.nav_userName,
@@ -166,16 +175,16 @@ communityControllers.controller('QuestionController', ['$rootScope', '$scope', '
 					quesEval:flag
 				},function(data){
 					if(data.evalFlag == 0){
-						alert("¸ÃÎÊÌâÄúÒÑ¾­²È¹ı£¡");
+						alert("è¯¥é—®é¢˜æ‚¨å·²ç»è¸©è¿‡ï¼");
 					}else if(data.evalFlag == 1){
-						alert("¸ÃÎÊÌâÄúÒÑ¾­¶¥¹ı£¡");
+						alert("è¯¥é—®é¢˜æ‚¨å·²ç»é¡¶è¿‡ï¼");
 					}else{
 						$scope.question.voteNum = voteNum;
 					}
 				});
 			}
 		}
-		//²éÑ¯ÏàËÆÎÊÌâ
+		//æŸ¥è¯¢ç›¸ä¼¼é—®é¢˜
 		QuestionService.getSimilarQuestions({
 			questionId: $routeParams.questionId
 		}, function(data) {
@@ -219,18 +228,17 @@ communityControllers.controller('AnswersController', ['$rootScope','$scope', '$r
 					userId : userName
 				};
 				if(answer.content == ""){
-					alert("ÇëÊäÈë»Ø´ğµÄÄÚÈİ£¡");
+					alert("è¯·è¾“å…¥å›ç­”çš„å†…å®¹ï¼");
 					return;
 				}
 				$("#submitAnswer").addClass("disabled");
 				QuestionService.saveAnswer({
 					questionId: $routeParams.questionId
 				},answer,function(){
-					//ÖØĞÂ¼ÓÔØµ±Ç°Ò³Ãæ
+					//é‡æ–°åŠ è½½å½“å‰é¡µé¢
 					QuestionService.getAnswers({
 						questionId: $routeParams.questionId
 					},function(data){
-						console.log(data);
 						$scope.answers = data;
 						ue.setContent("");
 						$("#submitAnswer").removeClass("disabled");
@@ -238,7 +246,7 @@ communityControllers.controller('AnswersController', ['$rootScope','$scope', '$r
 				});
 			}
 		}
-		//ÔÚÉèÖÃÍê»Ø´ğµÄ²ÉÄÉºó£¬ÒªÖØĞÂ²éÒ»±éÊı¾İ£¬½øĞĞÊı¾İÅÅĞò
+		//åœ¨è®¾ç½®å®Œå›ç­”çš„é‡‡çº³åï¼Œè¦é‡æ–°æŸ¥ä¸€éæ•°æ®ï¼Œè¿›è¡Œæ•°æ®æ’åº
 		$scope.afterSetAccept = function(){
 			QuestionService.getAnswers({
 				questionId: $routeParams.questionId
@@ -270,7 +278,7 @@ communityControllers.controller('CommentsController', ['$rootScope', '$scope', '
 		
 		$scope.replyClick = function(comment) {
 			$scope.showReply = true;
-			//ÕıÔÚ»Ø¸´µÄÆÀÂÛ
+			//æ­£åœ¨å›å¤çš„è¯„è®º
 			$scope.newComment.commentedUser = comment.userId;
 		}
 		$scope.deleteUser = function(){
@@ -287,11 +295,11 @@ communityControllers.controller('CommentsController', ['$rootScope', '$scope', '
 				var comment = {
 					content : $scope.newComment.content,
 					userId : userName,
-					commentedUser :¡¡$scope.newComment.commentedUser
+					commentedUser :ã€€$scope.newComment.commentedUser
 				};
 
 				if(!comment.content || comment.content == "undefined"){
-					alert("ÆÀÂÛµÄÄÚÈİ²»ÄÜÎª¿Õ£¡");
+					alert("è¯„è®ºçš„å†…å®¹ä¸èƒ½ä¸ºç©ºï¼");
 					return;
 				}
 				$("#submitComment").addClass("disabled");
@@ -299,7 +307,7 @@ communityControllers.controller('CommentsController', ['$rootScope', '$scope', '
 				CommentsService.saveComment({
 					answerId: $scope.answer.id
 				},comment,function(){
-					//Ë¢ĞÂÆÀÂÛĞÅÏ¢
+					//åˆ·æ–°è¯„è®ºä¿¡æ¯
 					CommentsService.getComments({
 						answerId: $scope.answer.id
 					}, function(data) {
@@ -316,9 +324,8 @@ communityControllers.controller('CommentsController', ['$rootScope', '$scope', '
 
 communityControllers.controller('UserInfoController', ['$rootScope', '$scope', '$routeParams','UserInfoService',
 	function($rootScope, $scope, $routeParams, UserInfoService) {
-		//ÕâÀïÓĞ¸öbug°¡£¬²»Í¨¹ıÂ·ÓÉ½øÒ³Ãæ£¨±ÈÈçË¢ĞÂÒ³Ãæ£©£¬Õâ¸örootscopeÀïµÄ×Ô¶¨Òå±äÁ¿Îªundefined,ÆäÊµËûÊÇÓĞµÄ°¡...
-		//console.log($rootScope)
-		//console.log($rootScope.nav_userName)
+		//è¿™é‡Œæœ‰ä¸ªbugå•Šï¼Œä¸é€šè¿‡è·¯ç”±è¿›é¡µé¢ï¼ˆæ¯”å¦‚åˆ·æ–°é¡µé¢ï¼‰ï¼Œè¿™ä¸ªrootscopeé‡Œçš„è‡ªå®šä¹‰å˜é‡ä¸ºundefined,å…¶å®ä»–æ˜¯æœ‰çš„å•Š...
+		$scope.canEditSignature = false;
 		if($rootScope.nav_userName){
 			if($rootScope.nav_userName==$routeParams.userName){
 				$rootScope.showFocus = false;
@@ -332,7 +339,7 @@ communityControllers.controller('UserInfoController', ['$rootScope', '$scope', '
 			}
 		}else{
 			$rootScope.showFocus = false;
-			//ÏÂÃæÕâ¶Î´úÂëÎªÁË½â¾öÉÏÃæµÄbug
+			//ä¸‹é¢è¿™æ®µä»£ç ä¸ºäº†è§£å†³ä¸Šé¢çš„bug
 			$rootScope.$watch('nav_userName',function(){
 				if($rootScope.nav_userName && $rootScope.nav_userName != $routeParams.userName){
 					UserInfoService.getFocusFlag({
@@ -344,11 +351,12 @@ communityControllers.controller('UserInfoController', ['$rootScope', '$scope', '
 				}
 		    })
 		}
-		//ÇëÇóÓÃ»§ĞÅÏ¢
+		//è¯·æ±‚ç”¨æˆ·ä¿¡æ¯
 		UserInfoService.getUserInfo({
 			userId:$routeParams.userName
 		},function(data){
 			$scope.userInfo = data;
+			$scope.userInfo.signature = $scope.userInfo.signature?$scope.userInfo.signature:"è¿™ä¸ªäººå¥½æ‡’ï¼Œä»€ä¹ˆéƒ½æ²¡ç•™ä¸‹^.^";
 			if(!data.bigImg){
 				$scope.userInfo.bigImg = "img/headImg.png";
 			}
@@ -359,7 +367,7 @@ communityControllers.controller('UserInfoController', ['$rootScope', '$scope', '
 				userId : $rootScope.nav_userName,
 				focusUserId : $routeParams.userName
 			},null,function(){
-				//Ë¢ĞÂ±»¹Ø×¢ÈËµÄ·ÛË¿
+				//åˆ·æ–°è¢«å…³æ³¨äººçš„ç²‰ä¸
 				UserInfoService.getFans({userId:$routeParams.userName},function(data){
 					$scope.fans = data;
 					for(var i = 0; i < $scope.fans.length; i++){
@@ -377,7 +385,7 @@ communityControllers.controller('UserInfoController', ['$rootScope', '$scope', '
 				userId : $rootScope.nav_userName,
 				focusUserId : $routeParams.userName
 			},null,function(){
-				//Ë¢ĞÂ±»¹Ø×¢ÈËµÄ·ÛË¿
+				//åˆ·æ–°è¢«å…³æ³¨äººçš„ç²‰ä¸
 				UserInfoService.getFans({userId:$routeParams.userName},function(data){
 					$scope.fans = data;
 					for(var i = 0; i < $scope.fans.length; i++){
@@ -390,7 +398,7 @@ communityControllers.controller('UserInfoController', ['$rootScope', '$scope', '
 			})
 		}
 		
-		//¼ÓÔØ¹ØÏµĞÅÏ¢
+		//åŠ è½½å…³ç³»ä¿¡æ¯
 		UserInfoService.getFocuses({userId:$routeParams.userName},function(data){
 			$scope.focuses = data;
 			for(var i = 0; i < $scope.focuses.length; i++){
@@ -408,7 +416,26 @@ communityControllers.controller('UserInfoController', ['$rootScope', '$scope', '
 			console.log(error);
 		});
 		
-		//×Ô¶¨ÒåÍ·Ïñ
+		//ç¼–è¾‘ä¸ªäººç­¾å
+		$scope.editSignature = function(){
+			$scope.canEditSignature = true;
+			setTimeout(function(){
+				$("#signatureInput").focus();
+			},1);
+		}
+		//è¾“å…¥æ¡†å¤±å»ç„¦ç‚¹ï¼Œç­¾åç¼–è¾‘å®Œæ¯•
+		$scope.signatureInputBlur = function(){
+			$scope.canEditSignature = false;
+			var userInfo = {
+    			userId : $routeParams.userName,
+    			signature : $scope.userInfo.signature
+    		}
+    		UserInfoService.saveUserInfo({
+				userId:$routeParams.userName
+			},userInfo,function(){});
+		}
+		
+		//è‡ªå®šä¹‰å¤´åƒ
 		$scope.uploadImg = function(){
 			$("#uploadImgModal").modal('show');
 			$scope.setCroper();
@@ -454,7 +481,7 @@ communityControllers.controller('UserInfoController', ['$rootScope', '$scope', '
     				userId:$routeParams.userName
     			},userInfo,
     			function(){
-    				//ÖØĞÂ¼ÓÔØ
+    				//é‡æ–°åŠ è½½
     				$scope.userInfo = UserInfoService.getUserInfo({
 						userId:$routeParams.userName
 					});
@@ -499,11 +526,16 @@ communityControllers.controller('selectImgController',['$scope',
 communityControllers.controller('UserQuestionsController',['$scope','$rootScope','$location','$routeParams','QuestionsService','searchParam',
 	function($scope,$rootScope,$location,$routeParams,QuestionsService,searchParam){
 		$scope.activedTabId = 1;
+		$scope.showDiff = true;//å¦‚æœä¸ºfalseï¼Œä¸æ˜¾ç¤ºé—®é¢˜å’Œæ–‡ç« çš„åŒºåˆ« 
+		
 		$scope.askTabId = 1;
-		$scope.collectTabId = 2;
+		$scope.answerTabId = 2;
+		$scope.articleTabId = 3;
+		$scope.collectTabId = 4;
+		
 		$scope.createdQuestions = QuestionsService.getUserCreatedQuestions({userId:$routeParams.userName},function(data){
 			for (var i = 0; i < $scope.createdQuestions.length; i++) {
-				$scope.createdQuestions[i].status = $scope.createdQuestions[i].solveFlag ? "½â¾ö" : "»Ø´ğ";
+				$scope.createdQuestions[i].status = $scope.createdQuestions[i].solveFlag ? "è§£å†³" : "å›ç­”";
 				$scope.createdQuestions[i].status_class = $scope.createdQuestions[i].solveFlag ? "q-solved" : ($scope.createdQuestions[i].answerNum > 0 ? "q-hasanswers" : "q-noanswers");
 				$scope.createdQuestions[i].tags = eval($scope.createdQuestions[i].tags);
 			}
@@ -518,19 +550,36 @@ communityControllers.controller('UserQuestionsController',['$scope','$rootScope'
 			if(tabId == $scope.askTabId){
 				$scope.createdQuestions = QuestionsService.getUserCreatedQuestions({userId:$routeParams.userName},function(data){
 					for (var i = 0; i < $scope.createdQuestions.length; i++) {
-						$scope.createdQuestions[i].status = $scope.createdQuestions[i].solveFlag ? "½â¾ö" : "»Ø´ğ";
+						$scope.createdQuestions[i].status = $scope.createdQuestions[i].solveFlag ? "è§£å†³" : "å›ç­”";
 						$scope.createdQuestions[i].status_class = $scope.createdQuestions[i].solveFlag ? "q-solved" : ($scope.createdQuestions[i].answerNum > 0 ? "q-hasanswers" : "q-noanswers");
 						$scope.createdQuestions[i].tags = eval($scope.createdQuestions[i].tags);
 					}
 				});
-			}else if(tabId == $scope.collectTabId){
-				$scope.collectedQuestions = QuestionsService.getUserCollectedQuestions({userId:$routeParams.userName},function(data){
-					for (var i = 0; i < $scope.collectedQuestions.length; i++) {
-						$scope.collectedQuestions[i].status = $scope.collectedQuestions[i].solveFlag ? "½â¾ö" : "»Ø´ğ";
-						$scope.collectedQuestions[i].status_class = $scope.collectedQuestions[i].solveFlag ? "q-solved" : ($scope.collectedQuestions[i].answerNum > 0 ? "q-hasanswers" : "q-noanswers");
-						$scope.collectedQuestions[i].tags = eval($scope.collectedQuestions[i].tags);
+			}else if(tabId == $scope.answerTabId){
+				$scope.answers = QuestionsService.getAnsweredQuestions({userId:$routeParams.userName},function(data){
+					for (var i = 0; i < $scope.answers.length; i++) {
+						$scope.answers[i].status = $scope.answers[i].solveFlag ? "è§£å†³" : "å›ç­”";
+						$scope.answers[i].status_class = $scope.answers[i].solveFlag ? "q-solved" : ($scope.answers[i].answerNum > 0 ? "q-hasanswers" : "q-noanswers");
+						$scope.answers[i].tags = eval($scope.answers[i].tags);
 					}
 				});
+			}else if(tabId == $scope.articleTabId){
+				$scope.articles = QuestionsService.getArticles({userId:$routeParams.userName},function(data){
+					for (var i = 0; i < $scope.articles.length; i++) {
+						$scope.articles[i].status_class = $scope.articles[i].upNum > 0 ? "a-hasvotes" : "a-novotes";
+						$scope.articles[i].tags = eval($scope.articles[i].tags);
+					}
+				});
+			}else if(tabId == $scope.collectTabId){
+				$scope.collects = QuestionsService.getUserCollects({userId:$routeParams.userName},function(data){
+					for (var i = 0; i < $scope.collects.length; i++) {
+						//$scope.collects[i].status = $scope.collects[i].solveFlag ? "è§£å†³" : "å›ç­”";
+						//$scope.collects[i].status_class = $scope.collects[i].solveFlag ? "q-solved" : ($scope.collects[i].answerNum > 0 ? "q-hasanswers" : "q-noanswers");
+						$scope.collects[i].status_class = $scope.collects[i].voteNum > 0 ? "a-hasvotes" : "a-novotes";
+						$scope.collects[i].tags = eval($scope.collects[i].tags);
+					}
+				});
+				console.log($scope.collects);
 			}
 		}
 		$scope.tagClick = function(tagName){
@@ -541,7 +590,17 @@ communityControllers.controller('UserQuestionsController',['$scope','$rootScope'
 
 communityControllers.controller('askController',['$scope','$rootScope','$location','askService',
 	function($scope,$rootScope,$location,askService){
-		//Õâ¸öÒ³Ãæ½ûÓÃbackspace¼ü£¬·ÀÖ¹Îó²Ù×÷µ¼ÖÂÎÊÌâ°×Ìî
+		$scope.share = function(){
+			$(".dropdown-label").text("åˆ†äº«");
+			$scope.placeholder = "æ ‡é¢˜ï¼šè¿½æ¢¦èµ¤å­å¿ƒ";
+			$scope.publishButton = "å‘å¸ƒåˆ†äº«";
+		}
+		$scope.ask = function(){
+			$(".dropdown-label").text("æé—®");
+			$scope.placeholder = "æé—®ï¼šä¸€å¥è¯è¯´æ¸…ä½ åœ¨å¼€å‘ä¸­é‡åˆ°çš„é—®é¢˜";
+			$scope.publishButton = "å‘å¸ƒé—®é¢˜";
+		}
+		//è¿™ä¸ªé¡µé¢ç¦ç”¨backspaceé”®ï¼Œé˜²æ­¢è¯¯æ“ä½œå¯¼è‡´é—®é¢˜ç™½å¡«
 		$(document).keydown(function(event){
 			if(event.keyCode == 8){
 				var evt = event.srcElement ? event.srcElement : event.target;
@@ -557,6 +616,8 @@ communityControllers.controller('askController',['$scope','$rootScope','$locatio
 		$scope.question = {};
 		$scope.question.title = "";
 		$scope.question.tags = "";
+		$scope.placeholder = "æé—®ï¼šä¸€å¥è¯è¯´æ¸…ä½ åœ¨å¼€å‘ä¸­é‡åˆ°çš„é—®é¢˜";
+		$scope.publishButton = "å‘å¸ƒé—®é¢˜";
 		
 		var ue = UE.getEditor('editor',{
 			toolbars: [
@@ -581,48 +642,68 @@ communityControllers.controller('askController',['$scope','$rootScope','$locatio
 				$scope.question.loginCode = userName;
 				$scope.question.content = ue.getContent();
 				if($scope.question.title == ""){
-					alert("ÇëÊäÈëÎÊÌâµÄ±êÌâ£¡");
+					if($scope.publishButton == "å‘å¸ƒé—®é¢˜"){
+						alert("è¯·è¾“å…¥é—®é¢˜çš„æ ‡é¢˜ï¼");
+					}else{
+						alert("è¯·è¾“å…¥åˆ†äº«çš„æ ‡é¢˜ï¼");
+					}
 					return;
 				}
 				if($scope.question.tags==""){
-					alert("ÇëÑ¡ÔñÎÊÌâ¶ÔÓ¦µÄ±êÇ©£¡");
+					if($scope.publishButton == "å‘å¸ƒé—®é¢˜"){
+						alert("è¯·é€‰æ‹©é—®é¢˜å¯¹åº”çš„æ ‡ç­¾ï¼");
+					}else{
+						alert("è¯·é€‰æ‹©åˆ†äº«å¯¹åº”çš„æ ‡ç­¾ï¼");
+					}
 					return;
 				}
 				if($scope.question.content==""){
-					alert("ÇëÊäÈëÎÊÌâµÄÏêÏ¸ÄÚÈİ£¡");
+					if($scope.publishButton == "å‘å¸ƒé—®é¢˜"){
+						alert("è¯·è¾“å…¥é—®é¢˜çš„è¯¦ç»†å†…å®¹ï¼");
+					}else{
+						alert("è¯·è¾“å…¥åˆ†äº«çš„è¯¦ç»†å†…å®¹ï¼");
+					}
 					return;
 				}
 				$("#publishQuestion").addClass("disabled");
 				
-				askService.saveQuestion($scope.question).success(function(){
-					//Ìø×ªµ½ÎÊÌâ²éÑ¯Ò³Ãæ
-					$("#publishQuestion").removeClass("disabled");
-					var path = $location.path().replace("/askQuestion","");
-					$location.path(path).replace();
-				});
+				if($scope.publishButton == "å‘å¸ƒé—®é¢˜"){
+					askService.saveQuestion($scope.question).success(function(){
+						//è·³è½¬åˆ°é—®é¢˜æŸ¥è¯¢é¡µé¢
+						$("#publishQuestion").removeClass("disabled");
+						var path = $location.path().replace("/askQuestion","");
+						$location.path(path).replace();
+					});
+				}else{
+					askService.saveArticle($scope.question).success(function(){
+						//è·³è½¬åˆ°é—®é¢˜æŸ¥è¯¢é¡µé¢
+						$("#publishQuestion").removeClass("disabled");
+						var path = $location.path().replace("/askQuestion","");
+						$location.path(path).replace();
+					});
+				}
 			}
 		}
 	}
 ])
 
-communityControllers.controller('loginController',['$scope','$routeParams','$rootScope','loginService','UserInfoService','QuestionService',
-	function($scope,$routeParams,$rootScope,loginService,UserInfoService,QuestionService){
+communityControllers.controller('loginController',['$scope','$routeParams','$rootScope','loginService','UserInfoService','QuestionService','ArticleService',
+	function($scope,$routeParams,$rootScope,loginService,UserInfoService,QuestionService,ArticleService){
 		$scope.login = function(){
 			loginService.login($scope.username,$scope.password).success(
 				function(data){
 					if(data.isLogin == "-2"){
-		        		alert("ÃÜÂë²»ÕıÈ·£¡")
+		        		alert("å¯†ç ä¸æ­£ç¡®ï¼")
 		        	}else if(data.isLogin == "-3"){
-			        	alert("ÓÃ»§Ãû²»´æÔÚ£¡")
-				    }else¡¡if(data.isLogin == "0"){
+			        	alert("ç”¨æˆ·åä¸å­˜åœ¨ï¼")
+				    }elseã€€if(data.isLogin == "0"){
 			        	loginCallback();
 					}else{
-						alert("±§Ç¸£¬µÇÂ¼Òì³££¡")
+						alert("æŠ±æ­‰ï¼Œç™»å½•å¼‚å¸¸ï¼")
 					}
 				}
 			);
 			var loginCallback = function(){
-				console.log("================")
 				$.cookie('userName',$scope.username,{path:"/"});
 				$('#loginModal').modal('hide');
 							
@@ -633,7 +714,7 @@ communityControllers.controller('loginController',['$scope','$routeParams','$roo
 				
 				$rootScope.showFocus = true;
 				if($routeParams.userName){
-					//ÔÚuserInfoÒ³ÃæµÇÂ¼£¬ÅĞ¶ÏÁ½ÕßµÄ¹ØÏµ
+					//åœ¨userInfoé¡µé¢ç™»å½•ï¼Œåˆ¤æ–­ä¸¤è€…çš„å…³ç³»
 					if($routeParams.userName==$rootScope.nav_userName){
 						$rootScope.showFocus = false;
 					}else{
@@ -662,6 +743,34 @@ communityControllers.controller('loginController',['$scope','$routeParams','$roo
 							});
 						}
 					});
+				}else if($routeParams.articleId){
+					ArticleService.getArticleDetail({
+						shareId: $routeParams.articleId
+					}, function(article) {
+						if(article.userId == $rootScope.nav_userName){
+							$rootScope.canCollect = false;
+							$rootScope.showCancelCollected = false;
+						}else{
+							$rootScope.canCollect = true;
+							ArticleService.hasCollected({
+								userId:$rootScope.nav_userName,
+								shareId:article.shareId
+							}, function(data) {
+								$rootScope.showCancelCollected = data.collected;
+							});
+							ArticleService.hasVoted({
+								userId:$rootScope.nav_userName,
+								shareId:article.shareId
+							}, function(data) {
+								if(data.evalFlag == -1){
+									//è¯¥æ–‡ç« æœªè¢«æ¨èè¿‡
+									$rootScope.canVote = true;
+								}else{
+									$rootScope.canVote = false;
+								}
+							})
+						}
+					});
 				}
 			}
 		}
@@ -687,14 +796,167 @@ communityControllers.controller('navController',['$scope','$rootScope','searchPa
 			$rootScope.nav_userName = "";
 			$rootScope.showFocus = false;
 			$rootScope.canSetQues = false;
-			//×¢ÏúµÄ»°£¬²»ÏÔÊ¾¡±È¡ÏûÊÕ²Ø¡°°´Å¥£¬ÏÔÊ¾¡±ÊÕ²Ø¡°°´Å¥£¬²¢ÇÒ°´Å¥²»¿ÉÒÔµã»÷
+			//æ³¨é”€çš„è¯ï¼Œä¸æ˜¾ç¤ºâ€å–æ¶ˆæ”¶è—â€œæŒ‰é’®ï¼Œæ˜¾ç¤ºâ€æ”¶è—â€œæŒ‰é’®ï¼Œå¹¶ä¸”æŒ‰é’®ä¸å¯ä»¥ç‚¹å‡»
 			$rootScope.canCollect = false;
 			$rootScope.showCancelCollected = false;
 		}
 		$scope.communityClick = function(){
-			//³õÊ¼»¯±äÁ¿tagName="";
+			//åˆå§‹åŒ–å˜é‡tagName="";
 			angular.extend(searchParam, {searchTag:""});
 			angular.extend(searchParam, {searchInfo:""});
+		}
+	}
+])
+
+communityControllers.controller('ArticleController',['$scope','$rootScope','$routeParams','ArticleService',
+	function($scope,$rootScope,$routeParams,ArticleService){
+		$scope.article = ArticleService.getArticleDetail({
+			shareId: $routeParams.articleId
+		}, function(article) {
+			$scope.article.tags = eval(article.tags);
+			//æ’å…¥å†…å®¹
+			$("#articleContent").append(article.content);
+			
+			//æµè§ˆé‡åŠ 1
+			$scope.article.viewNum += 1;
+			$scope.addView();
+			$rootScope.canVote = false;
+			if($rootScope.nav_userName){
+				if(article.userId == $rootScope.nav_userName){
+					$rootScope.canCollect = false;
+					$rootScope.showCancelCollected = false;
+				}else{
+					$rootScope.canCollect = true;
+					ArticleService.hasCollected({
+						userId:$rootScope.nav_userName,
+						shareId:article.shareId
+					},function(data){
+						$rootScope.showCancelCollected = data.collected;
+					});
+					ArticleService.hasVoted({
+						userId:$rootScope.nav_userName,
+						shareId:article.shareId
+					}, function(data) {
+						if(data.evalFlag == -1){
+							//è¯¥æ–‡ç« æœªè¢«æ¨èè¿‡
+							$rootScope.canVote = true;
+						}
+					})
+				}
+			}else{
+				$rootScope.showCancelCollected = false;
+			}
+		});
+		
+		$scope.addView = function(){
+			ArticleService.saveArticleIndex(
+				{
+					shareId: $routeParams.articleId,
+					shareIndex:"viewNum"
+				},
+				{
+					viewNum:$scope.article.viewNum
+				}
+			);
+		}
+		
+		//æ”¶è—
+		$scope.collect = function() {
+			$scope.article.collectNum += 1;
+			ArticleService.saveArticleIndex({
+				shareId: $routeParams.articleId,
+				shareIndex:"collectNum",
+				userId:$rootScope.nav_userName
+			},{
+				collectNum:$scope.article.collectNum
+			},function(){
+				$rootScope.showCancelCollected = true;
+			});
+		}
+		
+		//å–æ¶ˆæ”¶è—
+		$scope.cancelCollected = function(){
+			$scope.article.collectNum -= 1;
+			
+			ArticleService.cancelCollected({userId:$rootScope.nav_userName,shareId: $routeParams.articleId},null,function(){
+				$rootScope.showCancelCollected = false;
+			})
+		}
+		
+		$scope.vote = function() {
+			var voteNum = $scope.article.upNum + 1;
+			var userName = $rootScope.nav_userName;
+			
+			if(!userName){
+				$('#loginModal').modal('show');
+			}else{
+				//flag 1è¡¨ç¤ºé¡¶ï¼Œ0è¡¨ç¤ºè¸©
+				ArticleService.saveArticleIndex({
+					shareId: $routeParams.articleId,
+					userId: $rootScope.nav_userName,
+					shareIndex:"voteNum"
+				},{
+					voteNum:voteNum,
+					quesEval:1
+				},function(data){
+					$rootScope.canVote = false;
+				});
+			}
+		}
+		
+		$scope.newComment = {
+			commentedUser : $scope.article.userId
+		};
+		
+		ArticleService.getComments({
+			shareId: $routeParams.articleId
+		}, function(data) {
+			$scope.comments = data;
+		});
+		
+		$scope.submitComment = function(){
+			var userName = $rootScope.nav_userName;
+			
+			if(!userName){
+				$('#loginModal').modal('show');
+			}else{
+				var comment = {
+					content : $scope.newComment.content,
+					userId : userName,
+					commentedUser :ã€€$scope.newComment.commentedUser ? $scope.newComment.commentedUser : $scope.article.userId
+				};
+				
+				if(!comment.content || comment.content == "undefined"){
+					alert("è¯„è®ºçš„å†…å®¹ä¸èƒ½ä¸ºç©ºï¼");
+					return;
+				}
+				$("#submitComment").addClass("disabled");
+				
+				ArticleService.saveComment({
+					shareId: $routeParams.articleId
+				},comment,function(){
+					//åˆ·æ–°è¯„è®ºä¿¡æ¯
+					ArticleService.getComments({
+						shareId: $routeParams.articleId
+					}, function(data) {
+						$scope.comments = data;
+						$scope.newComment.content = "";
+						$("#submitComment").removeClass("disabled");
+						$scope.deleteUser();
+					})
+				});
+			}
+		}
+		
+		$scope.deleteUser = function(){
+			$scope.showReply = false;
+			$scope.newComment.commentedUser = $scope.article.userId;
+		}
+		
+		$scope.replyClick = function(comment) {
+			$scope.showReply = true;
+			//æ­£åœ¨å›å¤çš„è¯„è®º
+			$scope.newComment.commentedUser = comment.userId;
 		}
 	}
 ])

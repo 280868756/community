@@ -13,7 +13,7 @@ communityFilters.filter('commentDateFilter',
 	function(){
 		return function(input){
 			if(input){
-				return "¡¤"+input+"¡¤";
+				return "Â·"+input+"Â·";
 			}
 		};
 	});

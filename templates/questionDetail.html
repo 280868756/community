@@ -5,22 +5,22 @@
 			<div class="row">
 				<div class="col-md-9">
 					<div>
-						<a href="#/community/">ÎÊ´ğ</a>
-						<span>>ÎÊ´ğÏêÇé</span>
+						<a href="#/community/">é—®ç­”</a>
+						<span>>é—®ç­”è¯¦æƒ…</span>
 					</div>
 					<h3 class="mt-10">{{question.title}}</h3>
 					<div>
 						<a class="custom-a-none userName" href="#/community/userInfo/{{question.userId}}">{{question.userId}}</a>
-						<span>&nbsp;&nbsp;ÌáÎÊÓÚ&nbsp;&nbsp;</span>
+						<span>&nbsp;&nbsp;æé—®äº&nbsp;&nbsp;</span>
 						<span>{{question.askDate}}</span>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<ul class="list-unstyled">
 						<li class="mt-15 text-right">
-							<button class="btn btn-warning disabled" ng-click="focus()">ä¯ ÀÀ <span class="">{{question.viewNum}}</span></button>
-							<button class="btn btn-primary" ng-class="{'disabled':!canCollect}" ng-click="collect()" ng-show="!showCancelCollected">ÊÕ ²Ø <span class="">{{question.collectNum}}</span></button>
-							<button class="btn btn-primary" ng-click="cancelCollected()" ng-show="showCancelCollected">È¡ÏûÊÕ²Ø <span class="">{{question.collectNum}}</span></button>
+							<button class="btn btn-warning disabled" ng-click="focus()">æµ è§ˆ <span class="">{{question.viewNum}}</span></button>
+							<button class="btn btn-primary" ng-class="{'disabled':!canCollect}" ng-click="collect()" ng-show="!showCancelCollected">æ”¶ è— <span class="">{{question.collectNum}}</span></button>
+							<button class="btn btn-primary" ng-click="cancelCollected()" ng-show="showCancelCollected">å–æ¶ˆæ”¶è— <span class="">{{question.collectNum}}</span></button>
 						</li>
 					</ul>
 				</div>
@@ -32,9 +32,9 @@
 			<div class="col-md-9">
 				<div class="question">
 					<div class="sidebar console-button">
-						<div class="vote-btn vote-btn-up" ng-click="addVote()" data-toggle="tooltip" data-placement="top" title="ÎÊÌâ¶ÔÈËÓĞ°ïÖú£¬ÄÚÈİÍêÕû£¬ÎÒÒ²ÏëÖªµÀ´ğ°¸"></div>
+						<div class="vote-btn vote-btn-up" ng-click="addVote()" data-toggle="tooltip" data-placement="top" title="é—®é¢˜å¯¹äººæœ‰å¸®åŠ©ï¼Œå†…å®¹å®Œæ•´ï¼Œæˆ‘ä¹Ÿæƒ³çŸ¥é“ç­”æ¡ˆ"></div>
 						<div class="vote-count" ng-bind="question.voteNum"></div>
-						<div class="vote-btn vote-btn-down" ng-click="subVote()" data-toggle="tooltip" data-placement="bottom" title="ÎÊÌâÃ»ÓĞÊµ¼Ê¼ÛÖµ£¬È±ÉÙ¹Ø¼üÄÚÈİ£¬Ã»ÓĞ¸Ä½øÓàµØ"></div>
+						<div class="vote-btn vote-btn-down" ng-click="subVote()" data-toggle="tooltip" data-placement="bottom" title="é—®é¢˜æ²¡æœ‰å®é™…ä»·å€¼ï¼Œç¼ºå°‘å…³é”®å†…å®¹ï¼Œæ²¡æœ‰æ”¹è¿›ä½™åœ°"></div>
 					</div>
 					<div class="content">
 						<div id="questionContent" class="ml-60"></div>
@@ -48,14 +48,14 @@
 					</div>
 				</div>
 				<div class="answers" ng-controller="AnswersController">
-					<div class="answers-Num">{{answers.length}}¸ö»Ø´ğ</div>
+					<div class="answers-Num">{{answers.length}}ä¸ªå›ç­”</div>
 					<div class="answer" ng-repeat="answer in answers" ng-modal="answer">
 						<answer-item answer="answer" after-set-accept="afterSetAccept()"></answer-item>
 					</div>
-					<h3>×«Ğ´´ğ°¸</h3>
+					<h3>æ’°å†™ç­”æ¡ˆ</h3>
 					<script id="answerEditor" type="text/plain" style="width:100%;height:150px;"></script>
 					<div class="text-right  mt-15">
-						<button id="submitAnswer" class="btn btn-primary" ng-click="submitAnswer()">Ìá½»»Ø´ğ</button>
+						<button id="submitAnswer" class="btn btn-primary" ng-click="submitAnswer()">æäº¤å›ç­”</button>
 					</div>
 				</div>
 			</div>
@@ -63,7 +63,7 @@
 				<div>
 					<div class="first-widget-box">
 						<h4>
-							ÏàËÆÎÊÌâ
+							ç›¸ä¼¼é—®é¢˜
 						</h4>
 						<ul class="list-inline li-block">
 							<li class="tag-message" ng-repeat="question in similarQuestions"><a href="#/community/question/{{question.id}}">{{question.title}}</a></li>
