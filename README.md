@@ -6,8 +6,8 @@
 1、提问页
 ![image](https://github.com/LittleDouBi/community/blob/master/askPage.png)
 2、问题列表页
-![image](https://github.com/LittleDouBi/community/blob/master/mainPage1.png)
+![image](https://github.com/LittleDouBi/community/blob/master/mainPage2.png)
 3、问题详情页
 ![image](https://github.com/LittleDouBi/community/blob/master/detailPage.png)
 4、用户信息页
-![image](https://github.com/LittleDouBi/community/blob/master/userPage1.png)
+![image](https://github.com/LittleDouBi/community/blob/master/userPage2.png)
